@@ -3,7 +3,7 @@
 
 Explicación sencilla y rápida (lo más entendible posible??)
 
-El nombre de sandbox, hace referencia a que es una zona de pruebas, acá vamos a experimentar y tirar magia sin que nos sentíamos avergonzados y con miedo a que lo vean en el main, asi que tranquilos si piensan que su codigo esta mal, no lo va a ver nadie excepto nosotros 😀.
+El nombre de sandbox, hace referencia a que es una zona de pruebas, acá vamos a experimentar y tirar magia sin que nos sentíamos avergonzados y con miedo a que lo vean en el main, asi que tranquilos si piensan que su codigo esta mal no lo va a ver nadie excepto nosotros 😀.
 
 Dentro de la carpeta Mvp-pucara, van a encontrar el entorno en donde vamos a ir desarrollando y probando nuestro código en Astro, igualmente si les tira un error de dependencias o algo avisen por el grupo o busquen, pero no debería de tirar ningún error creo.
 
