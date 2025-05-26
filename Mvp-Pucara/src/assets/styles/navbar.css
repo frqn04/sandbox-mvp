@@ -130,3 +130,9 @@
 .navbar-extra a:hover{
     color: var(--primary-color);
 }
+
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: bold;
+
+}
