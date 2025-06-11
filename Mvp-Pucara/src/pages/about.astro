@@ -1,56 +1,370 @@
 ---
-
 import Layout from "../layouts/Layout.astro";
 ---
-<meta charset="UTF-8">
-    <div class="container">
-        <section>
-            <h1 class="title">Sobre Nosotros</h1>
 
-        </section>
-        <section>
-            <p>
-                ¿Quienes somos?
-            </p>
-            <p>
-            Mision: Acompañar a profesionales del gaming para desarrollarse, trabajar en equipo y lograr sus metas profesionales.
-            </p>
-            <p>
-                Visión: Convertir Pucará Gaming en una organización de Esports líder en Argentina, participando en los torneos de más alto nivel.
-            </p>
-            <p>
-                Valores: Profesionalismo, trabajo en equipo, colaboración, respeto y pasión por el gaming.
-
-        </section>
-        <section>
-            <p>
-                ¿Qué hacemos?
-            </p>
-            <p>
-                Nos especializamos en la organización de eventos, torneos y competiciones de videojuegos, así como en la creación de contenido relevante y entretenido para nuestra audiencia. Además, ofrecemos servicios de asesoramiento y consultoría en el ámbito del gaming y la tecnología.
-            </p>
-
-        </section>
-        <section>
-            <p>Conoce a nuestros dueños</p>
-            <p>
-                Juan Morteyru, Pablo Sanmartino, Lucas Morales
-            </p>
-
+<Layout title="Sobre Nosotros - Pucará Gaming">
+    <main class="about-page">
+        <!-- Hero Section -->
+        <section class="hero-about">
+            <div class="container">
+                <h1 class="main-title">SOBRE NOSOTROS</h1>
+                <div class="title-underline"></div>
+            </div>
         </section>
 
+        <!-- Historia y Misión Section -->
+        <section class="historia-mision">
+            <div class="container">
+                <div class="section-content">
+                    <div class="text-content">
+                        <h2 class="section-title">HISTORIA Y MISIÓN</h2>
+                        <p class="section-text">
+                            Desde nuestros inicios, Pucará Gaming se formó con el objetivo de impulsar el 
+                            desarrollo de profesionales del gaming en Argentina. Nuestra misión es 
+                            acompañar a cada jugador en su crecimiento competitivo y humano, brindando 
+                            un entorno de trabajo en equipo, compromiso y progreso constante.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="/mision.png" alt="Misión Pucará Gaming" class="section-image">
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Logros y Hitos Section -->
+        <section class="logros-hitos">
+            <div class="container">
+                <h2 class="section-title center">LOGROS Y HITOS</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <h3>1er puesto en el torneo</h3>
+                        <h4>Urban Battles</h4>
+                        <p>(Street Fighter)</p>
+                    </div>
+                    <div class="achievement-item">
+                        <h3>Múltiples participaciones</h3>
+                        <h4>en torneos presenciales de</h4>
+                        <p>Street Fighter</p>
+                    </div>
+                    <div class="achievement-item center-achievement">
+                        <h3>Presencia constante en redes sociales</h3>
+                    </div>
+                </div>
+                <div class="achievements-image">
+                    <img src="/achievements.png" alt="Logros Pucará Gaming" class="section-image">
+                </div>
+            </div>
+        </section>
 
-    </div>
+        <!-- Valores y Visión Section -->
+        <section class="valores-vision">
+            <div class="container">
+                <div class="section-content reverse">
+                    <div class="image-content">
+                        <img src="/vision.png" alt="Visión Pucará Gaming" class="section-image">
+                    </div>
+                    <div class="text-content">
+                        <h2 class="section-title">VALORES Y VISIÓN</h2>
+                        <p class="section-text">
+                            En Pucará Gaming creemos en el poder de la pasión, el profesionalismo, 
+                            la positividad y la sinergia para construir equipos sólidos.
+                        </p>
+                        <p class="section-text">
+                            Nuestra visión es convertirnos en una organización referente de Esports 
+                            en Argentina, representando el espíritu competitivo y la identidad 
+                            latinoamericana en cada torneo que disputamos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-
+        <!-- Owners Section -->
+        <section class="owners-section">
+            <div class="container">
+                <h2 class="section-title center">CONOCE A NUESTROS FUNDADORES</h2>
+                <div class="owners-grid">
+                    <div class="owner-card">
+                        <h3>Juan Morteyru</h3>
+                        <p>Co-Fundador</p>
+                    </div>
+                    <div class="owner-card">
+                        <h3>Pablo Sanmartino</h3>
+                        <p>Co-Fundador</p>
+                    </div>
+                    <div class="owner-card">
+                        <h3>Lucas Morales</h3>
+                        <p>Co-Fundador</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
 
 <style>
-
-    .title {
-        text-align: center;
-        font-size: 2rem
-        text-transform: uppercase;
-        font-family: 'Ubuntu', sans-serif;
-        
+    .about-page {
+        background-color: var(--dark-color);
+        color: var(--light-color);
+        min-height: 100vh;
+        padding-top: 120px;
     }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero-about {
+        text-align: center;
+        padding: 60px 0;
+        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+    }
+
+    .main-title {
+        font-size: 4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .title-underline {
+        width: 200px;
+        height: 4px;
+        background: var(--primary-color);
+        margin: 0 auto;
+        box-shadow: 0 0 20px var(--primary-color);
+    }
+
+    /* Section Styles */
+    .section-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        margin: 80px 0;
+    }
+
+    .section-content.reverse {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .section-title.center {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    .section-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(255, 87, 34, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .section-image:hover {
+        transform: scale(1.05);
+    }
+
+    /* Historia y Misión */
+    .historia-mision {
+        background: linear-gradient(135deg, rgba(255, 87, 34, 0.05) 0%, rgba(0, 0, 0, 0.9) 100%);
+        padding: 80px 0;
+        position: relative;
+    }
+
+    .historia-mision::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23FF5722" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    /* Logros y Hitos */
+    .logros-hitos {
+        padding: 80px 0;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(255, 87, 34, 0.05) 100%);
+        position: relative;
+    }
+
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+
+    .achievement-item {
+        background: rgba(255, 87, 34, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(255, 87, 34, 0.3);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .achievement-item:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 15px 30px rgba(255, 87, 34, 0.4);
+    }
+
+    .achievement-item h3 {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .achievement-item h4 {
+        color: var(--light-color);
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .achievement-item p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+    }
+
+    .center-achievement {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .achievements-image {
+        text-align: center;
+    }
+
+    /* Valores y Visión */
+    .valores-vision {
+        padding: 80px 0;
+        background: linear-gradient(135deg, rgba(255, 87, 34, 0.05) 0%, rgba(0, 0, 0, 0.9) 100%);
+    }
+
+    /* Owners Section */
+    .owners-section {
+        padding: 80px 0;
+        background: rgba(0, 0, 0, 0.9);
+    }
+
+    .owners-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 50px;
+    }
+
+    .owner-card {
+        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+        padding: 40px 30px;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(255, 87, 34, 0.3);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .owner-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 15px 30px rgba(255, 87, 34, 0.4);
+    }
+
+    .owner-card h3 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .owner-card p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 2.5rem;
+        }
+
+        .section-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .section-content.reverse {
+            grid-template-columns: 1fr;
+        }
+
+        .section-content.reverse .image-content {
+            order: -1;
+        }
+
+        .achievements-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .center-achievement {
+            grid-column: 1;
+        }
+
+        .owners-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .main-title {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .achievement-item,
+        .owner-card {
+            padding: 20px;
+        }
+    }
+</style>
