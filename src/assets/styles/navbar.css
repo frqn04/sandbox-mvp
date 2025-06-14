@@ -1,0 +1,138 @@
+@import './global.css';
+
+.navbar {
+    background: rgba(0, 0, 0, 0.678); /* Fondo semitransparente oscuro */
+    backdrop-filter: blur(10px) saturate(120%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); /* Sombra más pronunciada */
+    padding: 10px 0; /* Reducido de 15px a 10px */
+    position: absolute;   
+    top: 0;                
+    left: 0;               
+    width: 100%;           
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.navbar-border-top,
+.navbar-border-bottom {
+    height: 2px; /* Reducido de 3px a 2px */
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+.navbar-border-top {
+    top: 0;
+}
+
+.navbar-border-bottom {
+    bottom: 0;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative; 
+    flex-wrap: wrap; 
+    gap: 30px; /* Reducido de 40px a 30px */
+    padding: 0 20px; 
+    overflow: visible;
+    
+}
+
+
+.social-icons-container {
+    display: flex;
+    gap: 12px; /* Reducido de 15px a 12px */
+    order: 3;
+    padding-right: -20px;
+}
+
+.social-icon {
+    color: var(--light-color);
+    font-size: 0.9rem; /* Reducido de 1rem a 0.9rem */
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.navbar-logo {
+    order: 1;
+    margin-left: -20px;
+}
+
+.navbar-logo img {
+    height: 100px; /* Reducido de 140px a 100px */
+    
+    filter: drop-shadow(0 2px 5px rgba(255, 87, 34, 0.5)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+}
+
+
+
+.navbar-links {
+    display: flex;
+    gap: 25px; /* Reducido de 35px a 25px */
+    order: 2;
+    justify-content: center;
+}
+
+.nav-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    position: relative;
+    font-size: 0.9rem; /* Reducido de 1rem a 0.9rem */
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-extra {
+    position: relative;
+}
+
+.navbar-extra{
+    color: var(--light-color);
+    font-size: 1.2rem; /* Reducido de 1.4rem a 1.2rem */
+    transition: var(--transition);
+}
+
+.navbar-extra a:hover{
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: bold;
+
+}
