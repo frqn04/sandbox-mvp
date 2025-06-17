@@ -14,7 +14,6 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Historia y Misión Section -->
         <section class="historia-mision">
-            <div class="section-background"></div>
             <div class="container">
                 <div class="section-content">
                     <div class="text-content">
@@ -32,7 +31,6 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Logros y Hitos Section -->
         <section class="logros-hitos">
-            <div class="section-background"></div>
             <div class="container">
                 <h2 class="section-title center">LOGROS Y HITOS</h2>
                 <div class="achievements-grid">
@@ -55,7 +53,6 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Valores y Visión Section -->
         <section class="valores-vision">
-            <div class="section-background"></div>
             <div class="container">
                 <div class="section-content">
                     <div class="text-content">
@@ -138,21 +135,6 @@ import Layout from "../layouts/Layout.astro";
         box-shadow: 0 0 20px var(--primary-color);
     }
 
-    /* Section Background */
-    .section-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: blur(3px);
-        opacity: 0.3;
-        z-index: 1;
-    }
-
     /* Section Styles */
     .section-content {
         display: flex;
@@ -204,10 +186,21 @@ import Layout from "../layouts/Layout.astro";
         padding: 80px 0;
         position: relative;
         overflow: hidden;
+        background-image: url('/mision.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
-    .historia-mision .section-background {
-        background-image: url('/mision.png');
+    .historia-mision::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
     }
 
     /* Logros y Hitos */
@@ -215,10 +208,21 @@ import Layout from "../layouts/Layout.astro";
         padding: 80px 0;
         position: relative;
         overflow: hidden;
+        background-image: url('/achievements.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
-    .logros-hitos .section-background {
-        background-image: url('/achievements.png');
+    .logros-hitos::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
     }
 
     .achievements-grid {
@@ -270,10 +274,21 @@ import Layout from "../layouts/Layout.astro";
         padding: 80px 0;
         position: relative;
         overflow: hidden;
+        background-image: url('/vision.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
-    .valores-vision .section-background {
-        background-image: url('/vision.png');
+    .valores-vision::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
     }
 
     /* Owners Section */
