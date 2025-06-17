@@ -190,6 +190,7 @@ import Layout from "../layouts/Layout.astro";
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 
     .historia-mision::before {
@@ -212,6 +213,7 @@ import Layout from "../layouts/Layout.astro";
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 
     .logros-hitos::before {
@@ -278,6 +280,7 @@ import Layout from "../layouts/Layout.astro";
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 
     .valores-vision::before {
@@ -363,6 +366,13 @@ import Layout from "../layouts/Layout.astro";
 
         .hero-about {
             padding: 80px 0 60px 0;
+        }
+
+        /* Remove fixed attachment on mobile for better performance */
+        .historia-mision,
+        .logros-hitos,
+        .valores-vision {
+            background-attachment: scroll;
         }
     }
 
