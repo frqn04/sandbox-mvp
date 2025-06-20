@@ -1,26 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
-
+/* Variables CSS personalizadas para referencia */
 :root {
-    --primary-color: #FF5722;  
-    --dark-color: #000000;     
-    --light-color: #FFFFFF;    
-    --transition: all 0.3s ease;
+  --primary-color: #FF5722;
+  --dark-color: #000000;
+  --light-color: #FFFFFF;
+  --transition: all 0.3s ease;
 }
 
-
-body {
-    font-family: 'Ubuntu', sans-serif;
-    line-height: 1.6;
-    background-color: var(--dark-color);
+/* Espaciador para compensar el navbar fijo usando Tailwind con @apply */
+.navbar-global-spacer {
+  @apply h-[160px];
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+@media (max-width: 768px) {
+  .navbar-global-spacer {
+    @apply h-[140px];
+  }
 }

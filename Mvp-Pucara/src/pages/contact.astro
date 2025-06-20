@@ -1,0 +1,467 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contacto - Pucará Gaming">
+    <main class="contact-page">
+        
+        <section class="contact-section">
+            <div class="container">
+                
+                
+                <!-- Contenedor único para todo el contenido -->
+                <div class="single-content-container">
+                    <h1 class="main-title">CONTÁCTANOS</h1>
+                    <div class="title-underline"></div>
+
+                    <div class="intro-text">
+                        <p>Si te interesa establecer contacto con el área comercial de Pucará Gaming para representar marcas, sponsors u organizaciones. Si deseás acceder a material oficial y generar contenido exclusivo en medios periodísticos, audiovisuales o digitales. Si buscás ser parte del equipo profesional de trabajo y sumarte al crecimiento de Pucará Gaming.</p>
+                    </div>
+                    
+                    <!-- Formulario -->
+                    <h2 class="form-title">ENVÍANOS TU MENSAJE</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha-nacimiento">Fecha de nacimiento *</label>
+                            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required 
+                                class="date-picker" max={new Date().toISOString().split('T')[0]}>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="6" required placeholder="Cuéntanos sobre tu propuesta o consulta..."></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terminos" name="terminos" required>
+                                <span class="checkmark"></span>
+                                Acepto los <a href="#" class="terms-link">términos y condiciones</a> *
+                            </label>
+                        </div>
+                        
+                        <!-- Información de contacto -->
+                        <div class="contact-info-simple">
+                            <h3 class="contact-subtitle">Contáctanos también por email:</h3>
+                            <div class="email-contacts">
+                                <a href="mailto:comercial@pucaragaming.com">
+                                    <i class="fa-solid fa-envelope"></i> comercial@pucaragaming.com
+                                </a>
+                                <a href="mailto:info@pucaragaming.com">
+                                    <i class="fa-solid fa-envelope"></i> info@pucaragaming.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Pequeños iconos de redes sociales -->
+                        <div class="social-links-simple">
+                            <h3 class="contact-subtitle">Síguenos en redes:</h3>
+                            <div class="social-icons-simple">
+                                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="#" aria-label="Twitch"><i class="fa-brands fa-twitch"></i></a>
+                                <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Botón enviar al final -->
+                        <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .contact-page {
+        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+        color: var(--light-color);
+        min-height: 100vh;
+        padding-top: 80px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Agregar elementos decorativos al fondo */
+    .contact-page::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at center, rgba(255, 87, 34, 0.15) 0%, rgba(255, 87, 34, 0) 70%);
+        transform: rotate(-45deg);
+        z-index: 0;
+        pointer-events: none;
+    }
+    
+    .contact-page::after {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at center, rgba(255, 87, 34, 0.05) 0%, rgba(255, 87, 34, 0) 70%);
+        transform: rotate(45deg);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 650px; /* Reducido de 800px para que el formulario sea más compacto */
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Todo en una sola sección */
+    .contact-section {
+        padding: 50px 0; /* Reducido de 80px 0 */
+        background: transparent; /* Cambiado a transparente para que se vea el fondo de la página */
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Agregar sutiles líneas de acento */
+    .contact-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, rgba(255, 87, 34, 0.5), transparent);
+    }
+
+    /* Ajustar el título principal para que se vea adecuadamente dentro del contenedor */
+    .main-title {
+        font-size: 2.5rem; /* Reducido de 3rem para que encaje mejor dentro del contenedor */
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px; /* Reducido de 15px */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        text-align: center;
+    }
+
+    .title-underline {
+        width: 180px; /* Ligeramente reducido */
+        height: 3px;  /* Ligeramente reducido */
+        background: var(--primary-color);
+        margin: 0 auto 20px auto; /* Reducido de 30px */
+        box-shadow: 0 0 15px var(--primary-color);
+    }
+
+    /* Ajustar el padding superior del container ya que el título está dentro */
+    .single-content-container {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 30px; /* Reducido de 40px */
+        border-radius: 15px;
+        border: 2px solid rgba(255, 87, 34, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    /* Estilos para el date picker moderno */
+    .date-picker {
+        color-scheme: dark; /* Mejora la apariencia en modo oscuro */
+    }
+    
+    /* Estilos específicos para personalizar el date picker */
+    input[type="date"] {
+        appearance: none;
+        -webkit-appearance: none;
+        position: relative;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: var(--light-color);
+        font-size: 1rem;
+        cursor: pointer;
+        font-family: inherit;
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        color: var(--primary-color);
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        filter: invert(50%) sepia(54%) saturate(2678%) hue-rotate(346deg) brightness(97%) contrast(95%);
+        opacity: 0.8;
+    }
+    
+    input[type="date"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 10px rgba(255, 87, 34, 0.3);
+    }
+    
+    .intro-text {
+        margin-bottom: 30px; /* Reducido de 40px */
+    }
+
+    .intro-text p {
+        font-size: 1rem; /* Reducido de 1.1rem */
+        line-height: 1.5;
+        text-align: center; /* Centrado en lugar de izquierda */
+    }
+
+    .intro-text p:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-title {
+        font-size: 1.8rem; /* Reducido de 2rem */
+        font-weight: 700;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 25px; /* Reducido de 30px */
+        text-align: center;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* Reducido de 25px */
+    }
+
+    /* Mantener estilos de formulario */
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 5px; /* Reducido de 8px */
+        color: var(--light-color);
+        font-size: 0.95rem; /* Reducido de 1rem */
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px; /* Reducido de 12px 15px */
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--light-color);
+        font-size: 1rem;
+        transition: var(--transition);
+        backdrop-filter: blur(5px);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 10px rgba(255, 87, 34, 0.3);
+    }
+    
+    /* Reducir el alto del textarea */
+    .form-group textarea {
+        resize: none;
+        height: 100px; /* Altura fija en lugar de rows="6" */
+    }
+
+    .checkbox-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+    }
+
+    .terms-link {
+        color: var(--primary-color);
+        text-decoration: underline;
+        transition: var(--transition);
+    }
+
+    .terms-link:hover {
+        color: #ff7043;
+    }
+
+    /* Nueva sección de contacto simplificada */
+    .contact-subtitle {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .email-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .email-contacts a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: var(--transition);
+        padding: 10px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .email-contacts a:hover {
+        background: rgba(255, 87, 34, 0.1);
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .email-contacts i {
+        color: var(--primary-color);
+    }
+
+    /* Redes sociales pequeñas */
+    .social-links-simple {
+        margin-bottom: 30px;
+    }
+
+    .social-icons-simple {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .social-icons-simple a {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+
+    .social-icons-simple a:hover {
+        background: rgba(255, 87, 34, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #ff7043 100%);
+        color: var(--light-color);
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+        margin-top: 20px;
+        align-self: center;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 2.5rem;
+        }
+
+        .single-content-container {
+            padding: 30px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .main-title {
+            font-size: 2rem;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+        }
+
+        .contact-section {
+            padding: 60px 0;
+        }
+
+        .single-content-container {
+            padding: 20px 15px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm') as HTMLFormElement;
+        const dateInput = document.getElementById('fecha-nacimiento') as HTMLInputElement;
+        
+        // Establecer fecha máxima (hoy) para evitar fechas futuras
+        const today = new Date();
+        const minDate = new Date();
+        minDate.setFullYear(today.getFullYear() - 100); // Permitir hasta 100 años atrás
+        
+        // Formato YYYY-MM-DD para el atributo min
+        if (dateInput) {
+            dateInput.min = minDate.toISOString().split('T')[0];
+            dateInput.max = today.toISOString().split('T')[0];
+        }
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+                form.reset();
+            });
+        } else {
+            console.error("No se encontró el formulario");
+        }
+    });
+</script>

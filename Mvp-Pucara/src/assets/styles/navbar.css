@@ -1,138 +1,101 @@
 @import './global.css';
 
+/* Navbar base */
 .navbar {
-    background: rgba(0, 0, 0, 0.678); /* Fondo semitransparente oscuro */
-    backdrop-filter: blur(10px) saturate(120%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); /* Sombra más pronunciada */
-    padding: 15px 0;
-    position: absolute;   
-    top: 0;                
-    left: 0;               
-    width: 100%;           
-    z-index: 1000;
-    transition: background-color 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.1);
+  @apply fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ease-default border border-white/10 bg-black/50 backdrop-blur-lg backdrop-saturate-120 shadow-lg;
+  padding: 10px 0;
 }
 
+/* Navbar al hacer scroll */
+.navbar.scrolled {
+  @apply bg-black/90;
+  padding: 5px 0;
+}
 
+/* Bordes decorativos */
 .navbar-border-top,
 .navbar-border-bottom {
-    height: 3px;
-    background: var(--primary-color);
-    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-    position: absolute;
-    width: 100%;
-    left: 0;
+  @apply absolute left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_var(--primary-color),0_0_20px_var(--primary-color)];
 }
 
 .navbar-border-top {
-    top: 0;
+  top: 0;
 }
 
 .navbar-border-bottom {
-    bottom: 0;
+  bottom: 0;
 }
 
+/* Contenido del navbar */
 .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative; 
-    flex-wrap: wrap; 
-    gap: 40px; 
-    padding: 0 20px; 
-    overflow: visible;
-    
+  @apply flex justify-between items-center flex-wrap gap-10 max-w-[1400px] mx-auto px-5 relative overflow-visible;
 }
 
-
+/* Contenedor de iconos sociales */
 .social-icons-container {
-    display: flex;
-    gap: 15px;
-    order: 3;
-    padding-right: -20px;
+  @apply flex gap-4 order-3 pr-0;
 }
 
+/* Iconos sociales */
 .social-icon {
-    color: var(--light-color);
-    font-size: 1rem;
-    transition: var(--transition);
+  @apply text-light text-base transition-transform duration-300 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary;
 }
 
 .social-icon:hover {
-    color: var(--primary-color);
-    transform: translateY(-3px);
+  @apply text-primary -translate-y-1;
 }
 
+/* Logo */
 .navbar-logo {
-    order: 1;
-    margin-left: -20px;
+  @apply order-1 ml-[-20px];
 }
 
 .navbar-logo img {
-    height: 140px;
-    
-    filter: drop-shadow(0 2px 5px rgba(255, 87, 34, 0.5)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+  @apply h-[140px] transition-all duration-300 filter drop-shadow-[0_2px_5px_rgba(255,87,34,0.5)] drop-shadow-[0_0_8px_rgba(0,0,0,0.6)];
 }
 
+.navbar.scrolled .navbar-logo img {
+  @apply h-[110px];
+}
 
-
+/* Links del navbar */
 .navbar-links {
-    display: flex;
-    gap: 35px;
-    order: 2;
-    justify-content: center;
+  @apply flex gap-[35px] order-2 justify-center;
 }
 
 .nav-link {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition);
-    position: relative;
-    font-size: 1rem;
+  @apply text-white no-underline font-semibold uppercase tracking-wider relative text-base transition-colors duration-300 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary;
+  position: relative;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+  @apply text-primary;
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: var(--transition);
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: var(--transition);
 }
 
 .nav-link:hover::after {
-    width: 100%;
-}
-
-.navbar-extra {
-    position: relative;
-}
-
-.navbar-extra{
-    color: var(--light-color);
-    font-size: 1.4rem;
-    transition: var(--transition);
-}
-
-.navbar-extra a:hover{
-    color: var(--primary-color);
+  width: 100%;
 }
 
 .nav-link.active {
-    color: var(--primary-color);
-    font-weight: bold;
+  @apply text-primary font-bold;
+}
 
+/* Extra navbar (ej. iconos o botones) */
+.navbar-extra {
+  @apply relative text-light text-xl transition-colors duration-300;
+}
+
+.navbar-extra a:hover {
+  @apply text-primary;
 }

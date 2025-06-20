@@ -1,15 +1,29 @@
-<section class="hero"></section>
+<section class="hero">
+    <div class="navbar-spacer"></div>
+    <!-- El resto del contenido del hero iría aquí -->
+</section>
 
 <style>
-
 .hero {
     width: 100%;
     height: auto !important; 
     min-height: 60vh;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('/herobanner.png') center/cover fixed; 
+                url('/herobanner.png') center/cover no-repeat;
     position: relative;
     margin: 0;
-    padding-top: 80px;
+ 
+    background-attachment: scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.navbar-spacer {
+    height: 80px; 
+    width: 100%;
 }
 </style>

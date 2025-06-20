@@ -1,25 +1,123 @@
 ---
-import Layout from "../layouts/Layout.astro";
+// Eliminar la importación de Layout
 ---
+
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Pucará Gaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<body>
+    <div class="store-container">
+        <div class="coming-soon">
+            <div class="title-container">
+                <h1 class="orange-glow-text">PRÓXIMAMENTE...</h1>
+                <span class="construction-emoji">🚧</span>
+            </div>
+            <p>Nuestra tienda está en construcción</p>
+        </div>
+    </div>
+</body>
+</html>
 
-    <h1>PRÓXIMAMENTE...</h1>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Ubuntu', sans-serif;
+        background-color: #000000;
+        color: #ffffff;
+    }
 
-    <style>
+    .store-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: var(--dark-color);
+        text-align: center;
+    }
+
+    .coming-soon {
+        padding: 2rem;
+        max-width: 80%;
+    }
+
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin: 0; /* Quitar el margen inferior */
+    }
+    
+    .construction-emoji {
+        font-size: 4rem;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.7)); /* Sombra amarilla para el emoji */
+    }
+
+    p {
+        font-size: 1.5rem;
+        color: var(--light-color);
+        margin-top: 1rem;
+        opacity: 0.8;
+    }
+
+    /* Efecto naranja */
+    .orange-glow-text {
+        background-image: linear-gradient(
+            90deg, 
+            #ff6a00, #ff8c00, #ffaa00, 
+            #ff8c00, #ff6a00, #ff4d00, #ff6a00
+        );
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: orange-glow 6s linear infinite;
+        text-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
+    }
+
+    @keyframes orange-glow {
+        0% {
+            background-position: 0% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+
+    @media (max-width: 768px) {
         h1 {
-            text-align: center;
-            font-size: 4rem;
-            color: #cf5a00;
-            margin-top: 50px;
+            font-size: 3rem;
         }
-        body {
-            font-family: 'Ubuntu', sans-serif;
-            background-color: #000000;
-            margin: 0;
-            padding: 0;
+        
+        .construction-emoji {
+            font-size: 3rem;
         }
+        
+        p {
+            font-size: 1.2rem;
+        }
+    }
 
-    </style>
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        .construction-emoji {
+            font-size: 2.5rem;
+        }
+    }
+</style>
