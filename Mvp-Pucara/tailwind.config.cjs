@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-// tailwind.config.cjs
 module.exports = {
   content: [
     "./src/**/*.{astro,html,js,jsx,ts,tsx}",
@@ -13,6 +12,15 @@ module.exports = {
         primary: '#FF5722',
         dark: '#000000',
         light: '#FFFFFF',
+      },
+      transitionProperty: {
+        'default': 'all',
+      },
+      transitionDuration: {
+        '300': '300ms',
+      },
+      transitionTimingFunction: {
+        'ease': 'ease',
       },
     },
   },

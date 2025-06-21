@@ -1,0 +1,78 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PlayerCard from "../../components/PlayerCard.astro";
+
+const { team } = Astro.params;
+
+const teamsData = {
+  "dota-2": {
+    nombre: "DOTA 2",
+    emoji: "🛡️",
+    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
+    players: [
+      { nombre: "Juan Pérez", edad: 24, nacionalidad: "🇦🇷 Argentina", instagram: "juanperez", imagen: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+      { nombre: "Carlos Mendoza", edad: 26, nacionalidad: "🇦🇷 Argentina", instagram: "carlosmendoza", imagen: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+      { nombre: "Diego Silva", edad: 22, nacionalidad: "🇺🇾 Uruguay", instagram: "diegosilva", imagen: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+      { nombre: "Mateo Rodriguez", edad: 25, nacionalidad: "🇦🇷 Argentina", instagram: "mateorodriguez", imagen: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+      { nombre: "Lucas Fernandez", edad: 23, nacionalidad: "🇦🇷 Argentina", instagram: "lucasfernandez", imagen: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+    ],
+  },
+  "street-fighter": {
+    nombre: "STREET FIGHTER",
+    emoji: "👊",
+    bgClass: "bg-gradient-to-br from-gray-900/80 to-gray-800/90",
+    players: [
+      { nombre: "Pablo Sanmartino", edad: 28, nacionalidad: "🇦🇷 Argentina", instagram: "pablosanmartino", imagen: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+    ],
+  },
+  "fifa": {
+    nombre: "FIFA",
+    emoji: "⚽",
+    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
+    players: [
+      { nombre: "Sebastián García", edad: 21, nacionalidad: "🇦🇷 Argentina", instagram: "sebastiangarcia", imagen: "https://images.pexels.com/photos/1484794/pexels-photo-1484794.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" },
+    ],
+  },
+};
+
+// Asegurarse de que team sea una clave válida
+const currentTeam = teamsData[team as keyof typeof teamsData];
+
+if (!currentTeam) {
+  return Astro.redirect('/teams/dota-2');
+}
+
+const description = `Conoce al equipo de ${currentTeam.nombre} de Pucará Gaming.`;
+---
+
+<Layout title={`Equipo - ${currentTeam.nombre}`}>
+  <main class={`min-h-screen pt-20 ${currentTeam.bgClass} text-light`}>
+    <div class="max-w-6xl mx-auto px-5 py-20">
+      <div class="flex items-center justify-center gap-5 mb-16">
+        <h1 class="text-6xl font-bold uppercase tracking-wider text-primary drop-shadow-lg">
+          {currentTeam.nombre}
+        </h1>
+        <div class="text-6xl">{currentTeam.emoji}</div>
+      </div>
+
+      <!-- Selector de equipos -->
+      <div class="flex justify-center gap-4 mb-12">
+        <a href="/teams/dota-2" class={`px-4 py-2 rounded-lg ${team === 'dota-2' ? 'bg-primary text-light' : 'bg-dark/50 text-light/80'} hover:bg-primary/80 transition-colors`}>
+          DOTA 2
+        </a>
+        <a href="/teams/street-fighter" class={`px-4 py-2 rounded-lg ${team === 'street-fighter' ? 'bg-primary text-light' : 'bg-dark/50 text-light/80'} hover:bg-primary/80 transition-colors`}>
+          STREET FIGHTER
+        </a>
+        <a href="/teams/fifa" class={`px-4 py-2 rounded-lg ${team === 'fifa' ? 'bg-primary text-light' : 'bg-dark/50 text-light/80'} hover:bg-primary/80 transition-colors`}>
+          FIFA
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+        {currentTeam.players.map((player) => (
+          <PlayerCard {...player} />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,96 +1,61 @@
 @import './global.css';
 
 .footer {
-    background: rgb(0, 0, 0);
-    position: relative;
-    padding: 40px 0;
+  @apply bg-black relative py-10;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
+  @apply flex justify-between items-start gap-10;
 }
 
 .footer-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  @apply flex flex-col items-center gap-5;
 }
 
 .footer-logo img {
-    height: 120px;
-    transition: var(--transition);
-    filter: drop-shadow(0 2px 5px rgba(255, 87, 34, 0.3));
+  @apply h-30 transition-transform duration-300 filter drop-shadow-[0_2px_5px_rgba(255,87,34,0.3)];
 }
 
 .footer-logo a:hover img {
-    transform: scale(1.05);
+  @apply scale-105;
 }
 
 .footer-social-icons {
-    justify-content: center;
-    margin-top: 10px;
+  @apply flex justify-center mt-2.5;
 }
 
 .footer-social-icons .social-icon {
-    font-size: 1.5rem;
-    margin: 0 10px;
+  @apply text-2xl mx-2.5;
 }
 
 .footer-title {
-    color: var(--light-color);
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    position: relative;
-    padding-bottom: 10px;
+  @apply text-light text-xl mb-5 font-bold tracking-widest relative pb-2.5;
 }
 
 .footer-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background-color: var(--primary-color);
-    box-shadow: 0 0 10px var(--primary-color);
+  content: '';
+  @apply absolute bottom-0 left-0 w-10 h-1 bg-primary;
+  box-shadow: 0 0 10px var(--primary-color);
 }
 
 .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  @apply flex flex-col gap-4;
 }
 
 .footer-link {
-    color: var(--light-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
-    font-size: 1rem;
+  @apply text-light no-underline font-medium transition-transform duration-300 relative text-base;
 }
 
 .footer-link:hover {
-    color: var(--primary-color);
-    transform: translateX(5px);
+  @apply text-primary translate-x-1.5;
 }
 
 .footer-social {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  @apply flex flex-col items-end;
 }
 
 .navbar-border-top,
 .navbar-border-bottom {
-  height: 3px;
-  background: var(--primary-color);
+  @apply h-1 bg-primary w-full;
   box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-  width: 100%;
 }

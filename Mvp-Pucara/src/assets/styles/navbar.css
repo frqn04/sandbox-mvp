@@ -2,7 +2,7 @@
 
 /* Navbar base */
 .navbar {
-  @apply fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ease-default border border-white/10 bg-black/50 backdrop-blur-lg backdrop-saturate-120 shadow-lg;
+  @apply fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ease-in-out border border-white/10 bg-black/50 backdrop-blur-lg shadow-lg;
   padding: 10px 0;
 }
 

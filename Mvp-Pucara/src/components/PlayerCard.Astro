@@ -1,0 +1,32 @@
+---
+export interface Props {
+    nombre: string;
+  edad: number;
+  nacionalidad: string;
+  instagram: string;
+  imagen: string;
+}
+
+const { nombre, edad, nacionalidad, instagram, imagen } = Astro.props;
+---
+
+<div class="group bg-gradient-to-br from-dark/80 to-gray-800/90 rounded-3xl p-6 border-2 border-primary/20 hover:border-primary transition-all duration-500 hover:-translate-y-3 hover:scale-105 shadow-xl relative overflow-hidden">
+    <div class="relative z-10">
+        <div class="w-32 h-32 mx-auto mb-5 rounded-full overflow-hidden border-4 border-primary shadow-lg group-hover:shadow-primary/60 transition-all duration-300 group-hover:scale-105">
+            <img src={imagen} alt={nombre} loading="lazy" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+        </div>
+        
+        <div class="text-center">
+            <h3 class="text-xl font-bold text-light uppercase tracking-wide mb-2 group-hover:text-primary transition-colors duration-300">
+                {nombre}
+            </h3>
+            <p class="text-light/80 font-medium mb-2">{edad} años</p>
+            <p class="text-light/80 text-lg mb-4">{nacionalidad}</p>
+            
+            <a href={`https://instagram.com/${instagram}`} target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 text-primary font-semibold text-sm py-2 px-4 border-2 border-primary rounded-full hover:bg-primary hover:text-light transition-all duration-300 bg-primary/10">
+                <i class="fa-brands fa-instagram text-lg"></i> @{instagram}
+            </a>
+        </div>
+    </div>
+</div>
