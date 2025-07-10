@@ -5,8 +5,9 @@
     "outDir": "./build",
     "baseUrl": ".",
     "paths": {
-      "@ioc:*": ["node_modules/@adonisjs/core/build/src/*"]
+      "@ioc:Adonis/Addons/Auth": ["./node_modules/@ioc/@adonisjs/auth/build/index"]
     },
-    "types": []
+
+    "types": ["@adonisjs/core", "@adonisjs/auth"]
   }
 }

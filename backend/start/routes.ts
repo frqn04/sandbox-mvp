@@ -8,16 +8,14 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import UsersController from '#controllers/users_controller'
+//import UsersController from '#controllers/users_controller'
 
 // Ruta raíz de prueba
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
 
-// Ruta POST /register que llama al método register de UsersController
-router.post('/register', async (ctx) => {
-  return new UsersController().register(ctx)
-})
+const UsersController = () => import('#controllers/users_controller')
+
+router.get('/users', [UsersController, 'index']) // Read all
+router.get('/users/:id', [UsersController, 'show']) // Read one
+router.post('/users/register', [UsersController, 'register']) // Create
+router.put('/users/:id', [UsersController, 'update']) // Update
+router.delete('/users/:id', [UsersController, 'destroy']) // Delete

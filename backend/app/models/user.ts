@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, beforeSave, column } from '@adonisjs/lucid/orm'
+
 import Hash from '@adonisjs/core/services/hash' // <-- Importación correcta
 
 export default class User extends BaseModel {

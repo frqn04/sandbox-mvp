@@ -49,7 +49,7 @@ router.get('/docs', async ({ response }) => {
 })
 
 router.get('/docs/*', async ({ params, response }) => {
-  const assetPath = join(swaggerUiDist.getAbsoluteFSPath(), params['*'])
+  const assetPath = join(swaggerUiDist.getAbsoluteFSPath(), ...params['*'])
   const stream = createReadStream(assetPath)
   return response.stream(stream)
 })
