@@ -7,7 +7,7 @@ const teams = getAllTeams();
 ---
 
 <Layout 
-    title="Equipos - Pucará Gaming | Dota 2, Street Fighter y Más"
+    title="Equipos - Pucará Gaming"
     description="Conoce todos los equipos de Pucará Gaming. Nuestros roster profesionales de Dota 2, Street Fighter 6, Tekken 8 y League of Legends. Los mejores jugadores argentinos compitiendo al más alto nivel."
     keywords="equipos pucara gaming, dota 2 team, street fighter team, tekken team, league of legends, roster gaming, jugadores profesionales argentina"
 >
@@ -25,13 +25,15 @@ const teams = getAllTeams();
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {teams.map((team) => (
-            <a href={`/teams/${team.id}`} class="group relative rounded-3xl overflow-hidden shadow-xl transition-all duration-500 border-2 border-primary/20 hover:border-primary/60">
-              <div class={`h-64 ${team.bgClass} flex flex-col justify-center items-center p-6`}>
-                <img src={team.imagen} alt={team.nombre} class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary mb-6 shadow-lg transition-transform duration-300" />
+            <a href={`/teams/${team.id}`} class="group relative rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-all duration-500 border-2 border-primary/20 hover:border-primary/60">
+              <div class={`h-80 ${team.bgClass} flex flex-col justify-center items-center p-6`}>
+                <img src={team.imagen} alt={team.nombre} class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300" />
                 
-                <h2 class="text-2xl md:text-3xl font-bold text-primary transition-transform duration-300">
+                <h2 class="text-2xl md:text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300 mb-2">
                   {team.nombre}
                 </h2>
+                
+              
               </div>
               
               <!-- Efecto hover -->
