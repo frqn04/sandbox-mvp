@@ -2,95 +2,138 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Sobre Nosotros - Pucará Gaming">
-    <main class="about-page">
+<Layout 
+    title="Nosotros - Pucará Gaming | Historia y Misión"
+    description="Conoce la historia de Pucará Gaming, nuestra misión, visión y valores. Descubre quiénes somos, qué nos motiva y cómo construimos la comunidad gaming más fuerte de Argentina desde 2020."
+    keywords="sobre pucara gaming, historia, mision vision, equipo fundador, gaming argentina, esports organization"
+>
+    <main class="bg-black text-white min-h-screen font-ubuntu">
+        
         <!-- Hero Section -->
-        <section class="hero-about">
-            <div class="container">
-                <h1 class="main-title">SOBRE NOSOTROS</h1>
-                <div class="title-underline"></div>
+        <section class="text-center py-20 bg-gradient-to-br from-primary/10 to-black/80 relative">
+            <div class="max-w-7xl mx-auto px-5 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold uppercase tracking-wider mb-5 text-white drop-shadow-lg">
+                    NOSOTROS
+                </h1>
+                <div class="w-48 h-1 bg-primary mx-auto shadow-primary-glow"></div>
             </div>
         </section>
 
-        <!-- Historia y Misión Section -->
-        <section class="historia-mision">
-            <div class="section-content">
-                <div class="text-content">
-                    <h2 class="section-title">HISTORIA Y MISIÓN</h2>
-                    <p class="section-text">
-                        Desde nuestros inicios, Pucará Gaming se formó con el objetivo de impulsar el 
-                        desarrollo de profesionales del gaming en Argentina. Nuestra misión es 
-                        acompañar a cada jugador en su crecimiento competitivo y humano, brindando 
-                        un entorno de trabajo en equipo, compromiso y progreso constante.
-                    </p>
+        <!-- Misión, Visión y Valores Section -->
+        <section class="py-28 relative overflow-hidden" 
+                 style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/vision.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="max-w-7xl mx-auto px-5 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                    
+                    <!-- Misión -->
+                    <div class="text-center bg-black/50 backdrop-blur-sm rounded-lg p-10 border border-primary/20 hover:border-primary/50 transition-colors">
+                        <div class="mb-8">
+                            <div class="w-20 h-20 mx-auto bg-primary rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-bullseye text-white text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                                Misión
+                            </h2>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            Acompañar a profesionales del gaming para desarrollarse, trabajar en equipo y lograr sus metas profesionales.
+                        </p>
+                    </div>
+
+                    <!-- Visión -->
+                    <div class="text-center bg-black/50 backdrop-blur-sm rounded-lg p-10 border border-primary/20 hover:border-primary/50 transition-colors">
+                        <div class="mb-8">
+                            <div class="w-20 h-20 mx-auto bg-primary rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-eye text-white text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                                Visión
+                            </h2>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            Convertir Pucará Gaming en una organización de Esports líder en Argentina, participando en los torneos de más alto nivel.
+                        </p>
+                    </div>
+
+                    <!-- Valores -->
+                    <div class="text-center bg-black/50 backdrop-blur-sm rounded-lg p-10 border border-primary/20 hover:border-primary/50 transition-colors">
+                        <div class="mb-8">
+                            <div class="w-20 h-20 mx-auto bg-primary rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-gem text-white text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                                Valores
+                            </h2>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            Pasión, profesionalismo, positividad, sinergia.
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Logros y Hitos Section -->
-        <section class="logros-hitos">
-            <div class="container">
-                <h2 class="section-title center">LOGROS Y HITOS</h2>
-                <div class="achievements-grid">
-                    <div class="achievement-item">
-                        <h3>1er puesto en el torneo</h3>
-                        <h4>Urban Battles</h4>
-                        <p>(Street Fighter)</p>
+        <!-- Separador suave -->
+        <div class="h-2 bg-gradient-to-r from-transparent via-gray-800/50 to-transparent"></div>
+
+        <!-- Logros e Hitos Section -->
+        <section class="py-28 min-h-[80vh] flex items-center relative overflow-hidden" 
+                 style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/achievements.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="max-w-7xl mx-auto px-5 w-full relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-primary uppercase tracking-wide mb-20 drop-shadow-lg">
+                    LOGROS E HITOS
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pt-8">
+                    <div class="bg-black/60 p-10 rounded-2xl text-center border border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow backdrop-blur-sm">
+                        <h3 class="text-primary text-xl font-semibold mb-4">1er puesto en el torneo</h3>
+                        <h4 class="text-white text-lg mb-3">Urban Battles</h4>
+                        <p class="text-white/80 text-base">(Street Fighter)</p>
                     </div>
-                    <div class="achievement-item">
-                        <h3>Múltiples participaciones</h3>
-                        <h4>en torneos presenciales de</h4>
-                        <p>Street Fighter</p>
+                    <div class="bg-black/60 p-10 rounded-2xl text-center border border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow backdrop-blur-sm">
+                        <h3 class="text-primary text-xl font-semibold mb-4">Múltiples participaciones</h3>
+                        <h4 class="text-white text-lg mb-3">en torneos presenciales de</h4>
+                        <p class="text-white/80 text-base">Street Fighter</p>
                     </div>
-                    <div class="achievement-item">
-                        <h3>Presencia constante en redes sociales</h3>
+                    <div class="bg-black/60 p-10 rounded-2xl text-center border border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow backdrop-blur-sm">
+                        <h3 class="text-primary text-xl font-semibold mb-4">Presencia constante en redes sociales</h3>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Valores y Visión Section -->
-        <section class="valores-vision">
-            <div class="section-content">
-                <div class="text-content">
-                    <h2 class="section-title">VALORES Y VISIÓN</h2>
-                    <p class="section-text">
-                        En Pucará Gaming creemos en el poder de la pasión, el profesionalismo, 
-                        la positividad y la sinergia para construir equipos sólidos.
-                    </p>
-                    <p class="section-text">
-                        Nuestra visión es convertirnos en una organización referente de Esports 
-                        en Argentina, representando el espíritu competitivo y la identidad 
-                        latinoamericana en cada torneo que disputamos.
-                    </p>
-                </div>
-            </div>
-        </section>
+        <!-- Separador suave con gradiente -->
+        <div class="h-3 bg-gradient-to-r from-black via-gray-900/80 to-black"></div>
 
         <!-- Owners Section -->
-        <section class="owners-section">
-            <div class="container">
-                <h2 class="section-title center">CONOCE A NUESTROS FUNDADORES</h2>
-                <div class="owners-grid">
-                    <div class="owner-card">
-                        <img src="/founders/juan.png" alt="Juan Morteyru" class="owner-photo">
-                        <div class="owner-info">
-                            <h3>Juan Morteyru</h3>
-                            <p>Co-Fundador</p>
+        <section class="py-20 relative bg-gradient-to-br from-primary/10 to-black/80">
+            <div class="max-w-7xl mx-auto px-5 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white uppercase tracking-wide mb-16 drop-shadow-2xl">
+                    CONOCE A NUESTRO EQUIPO
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+                    <div class="bg-black/60 rounded-2xl border-2 border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow overflow-hidden flex flex-col h-full">
+                        <img src="/founders/juan.png" alt="Juan Morteyru" 
+                             class="w-full h-80 md:h-96 object-cover object-top">
+                        <div class="p-6 bg-gradient-to-br from-primary/10 to-black/90 flex-grow flex flex-col justify-center">
+                            <h3 class="text-primary text-2xl font-bold mb-3 drop-shadow-lg">Juan Morteyru</h3>
+                            <p class="text-white text-lg font-medium drop-shadow-md">Co-Fundador</p>
                         </div>
                     </div>
-                    <div class="owner-card">
-                        <img src="/founders/pablo.png" alt="Pablo Sanmartino" class="owner-photo">
-                        <div class="owner-info">
-                            <h3>Pablo Sanmartino</h3>
-                            <p>Co-Fundador</p>
+                    <div class="bg-black/60 rounded-2xl border-2 border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow overflow-hidden flex flex-col h-full">
+                        <img src="/founders/pablo.png" alt="Pablo Sammartino" 
+                             class="w-full h-80 md:h-96 object-cover object-top">
+                        <div class="p-6 bg-gradient-to-br from-primary/10 to-black/90 flex-grow flex flex-col justify-center">
+                            <h3 class="text-primary text-2xl font-bold mb-3 drop-shadow-lg">Pablo Sammartino</h3>
+                            <p class="text-white text-lg font-medium drop-shadow-md">Co-Fundador</p>
                         </div>
                     </div>
-                    <div class="owner-card">
-                        <img src="/founders/lucas.png" alt="Lucas Morales" class="owner-photo">
-                        <div class="owner-info">
-                            <h3>Lucas Morales</h3>
-                            <p>Co-Fundador</p>
+                    <div class="bg-black/60 rounded-2xl border-2 border-primary/30 transition-all duration-300 hover:-translate-y-3 hover:border-primary hover:shadow-primary-glow overflow-hidden flex flex-col h-full">
+                        <img src="/founders/lucas.png" alt="Lucas Morales" 
+                             class="w-full h-80 md:h-96 object-cover object-top">
+                        <div class="p-6 bg-gradient-to-br from-primary/10 to-black/90 flex-grow flex flex-col justify-center">
+                            <h3 class="text-primary text-2xl font-bold mb-3 drop-shadow-lg">Lucas Morales</h3>
+                            <p class="text-white text-lg font-medium drop-shadow-md">Co-Fundador</p>
                         </div>
                     </div>
                 </div>
@@ -98,405 +141,3 @@ import Layout from "../layouts/Layout.astro";
         </section>
     </main>
 </Layout>
-
-<style>
-    .about-page {
-        background-color: var(--dark-color);
-        color: var(--light-color);
-        min-height: 100vh;
-    }
-
-    /* Contenedor base */
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 2;
-        width: 100%;
-    }
-
-    /* Hero Section */
-    .hero-about {
-        text-align: center;
-        padding: 80px 0 80px 0;
-        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-        margin-top: 0;
-        position: relative;
-    }
-
-    .main-title {
-        font-size: 4rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-    .title-underline {
-        width: 200px;
-        height: 4px;
-        background: var(--primary-color);
-        margin: 0 auto;
-        box-shadow: 0 0 20px var(--primary-color);
-    }
-
-    /* Section Styles - Base unificada */
-    .section-content {
-        width: 100%; 
-        display: flex;
-        margin: 80px 0;
-        position: relative;
-        z-index: 2;
-    }
-
-    /* Text content base */
-    .text-content {
-        max-width: 500px;
-        background: none;
-        border: none;
-        padding: 0;
-        backdrop-filter: none;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Historia y Misión */
-    .historia-mision .section-content {
-        justify-content: flex-start;
-        width: 100%;
-        padding: 0 120px 0 200px;
-        position: relative;
-    }
-
-    .historia-mision .text-content {
-        text-align: left;
-        margin-right: auto;
-        margin-left: 0;
-        max-width: 500px;
-    }
-
-    /* Valores y Visión */
-    .valores-vision .section-content {
-        justify-content: flex-end;
-        width: 100%;
-        padding: 0 200px 0 120px; /* Invertidos los valores: más padding derecho (200px) */
-        position: relative;
-    }
-
-    .valores-vision .text-content {
-        text-align: left;
-        margin-left: auto;
-        margin-right: 0;
-        max-width: 500px;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-    .section-title.center {
-        text-align: center;
-        margin-bottom: 50px;
-        background: none;
-        padding: 0;
-        border-radius: 0;
-        backdrop-filter: none;
-    }
-
-    .section-text {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        margin-bottom: 20px;
-    }
-    
-    /* Valores y Visión - Textos alineados a la izquierda */
-    .valores-vision .section-text {
-        text-align: left;
-    }
-
-    /* Estilos de fondo para las secciones */
-    .historia-mision {
-        padding: 100px 0;
-        position: relative;
-        overflow: hidden;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                    url('/mision.png');
-    }
-
-    /* Logros y Hitos */
-    .logros-hitos {
-        padding: 100px 0;
-        position: relative;
-        overflow: hidden;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                    url('/achievements.png');
-    }
-
-    /* Logros y Hitos - Grid centrado */
-    .achievements-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-        margin-bottom: 60px;
-        position: relative;
-        z-index: 2;
-        padding-top: 60px;
-    }
-
-    .achievement-item {
-        background: rgba(0, 0, 0, 0.6);
-        padding: 30px;
-        border-radius: 15px;
-        text-align: center;
-        border: 1px solid rgba(255, 87, 34, 0.3);
-        transition: all 0.3s ease;
-        backdrop-filter: blur(5px);
-    }
-
-    .achievement-item:hover {
-        transform: translateY(-10px);
-        border-color: var(--primary-color);
-        box-shadow: 0 15px 30px rgba(255, 87, 34, 0.4);
-    }
-
-    .achievement-item h3 {
-        color: var(--primary-color);
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
-
-    .achievement-item h4 {
-        color: var(--light-color);
-        font-size: 1.1rem;
-        margin-bottom: 5px;
-    }
-
-    .achievement-item p {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1rem;
-    }
-
-    /* Valores y Visión */
-    .valores-vision {
-        padding: 100px 0;
-        position: relative;
-        overflow: hidden;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                    url('/vision.png');
-    }
-
-    /* Owners Section - Con fotos */
-    .owners-section {
-        padding: 80px 0;
-        position: relative;
-        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-    }
-
-    .owners-section .section-title.center {
-        color: white;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-    }
-
-    .owners-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-        margin-top: 50px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .owner-card {
-        background: rgba(0, 0, 0, 0.6);
-        border-radius: 15px;
-        text-align: center;
-        border: 2px solid rgba(255, 87, 34, 0.3);
-        transition: all 0.3s ease;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .owner-card:hover {
-        transform: translateY(-10px);
-        border-color: var(--primary-color);
-        box-shadow: 0 15px 30px rgba(255, 87, 34, 0.4);
-    }
-
-    .owner-photo {
-        width: 100%;
-        height: 350px; /* Altura aumentada para mostrar más de la foto */
-        object-fit: cover;
-        object-position: top center; /* Enfoca la parte superior de la imagen */
-        border-top-left-radius: 13px;
-        border-top-right-radius: 13px;
-    }
-
-    .owner-info {
-        padding: 25px 20px;
-        background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .owner-card h3 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        font-weight: 700;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
-    }
-
-    .owner-card p {
-        color: white;
-        font-size: 1.1rem;
-        font-weight: 500;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 2.5rem;
-        }
-
-        .text-content {
-            padding: 0;
-        }
-
-        .achievements-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .owners-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .section-title {
-            font-size: 2rem;
-        }
-
-        .section-text {
-            font-size: 1.1rem;
-        }
-
-        .hero-about {
-            padding: 60px 0 60px 0;
-        }
-        
-        .historia-mision,
-        .logros-hitos,
-        .valores-vision {
-            background-attachment: scroll;
-            min-height: 50vh;
-            padding: 60px 0;
-        }
-        
-        .historia-mision .section-content,
-        .valores-vision .section-content {
-            justify-content: center;
-            padding-left: 0;
-            padding-right: 0;
-        }
-        
-        .historia-mision .text-content,
-        .valores-vision .text-content {
-            text-align: center;
-            margin: 0 auto;
-        }
-        
-        .historia-mision .section-title,
-        .historia-mision .section-text,
-        .valores-vision .section-title,
-        .valores-vision .section-text {
-            text-align: center;
-        }
-
-        .owner-photo {
-            height: 320px; /* Aumentado para móviles también */
-        }
-    }
-
-    @media (max-width: 480px) {
-        .main-title {
-            font-size: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-        }
-
-        .achievement-item,
-        .owner-card {
-            padding: 20px;
-        }
-
-        .text-content {
-            padding: 0;
-        }
-
-        .historia-mision,
-        .logros-hitos,
-        .valores-vision {
-            min-height: 40vh;
-            padding: 40px 0;
-        }
-
-        .owner-photo {
-            height: 280px; /* Aumentado para móviles pequeños */
-        }
-    }
-
-    /* Desktop optimization */
-    @media (min-width: 1024px) {
-        .historia-mision,
-        .logros-hitos,
-        .valores-vision {
-            background-position: center center;
-            background-size: cover;
-            min-height: 80vh;
-        }
-    }
-
-    /* Large screens optimization */
-    @media (min-width: 1440px) {
-        .historia-mision,
-        .logros-hitos,
-        .valores-vision {
-            background-size: cover;
-            background-position: center center;
-        }
-    }
-</style>

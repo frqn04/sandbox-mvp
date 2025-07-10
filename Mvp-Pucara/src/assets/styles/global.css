@@ -4,7 +4,7 @@
 
 /* Variables CSS personalizadas para referencia */
 :root {
-  --primary-color: #FF5722;
+  --primary-color: #ea601a;
   --dark-color: #000000;
   --light-color: #FFFFFF;
   --transition: all 0.3s ease;
@@ -12,11 +12,35 @@
 
 /* Espaciador para compensar el navbar fijo usando Tailwind con @apply */
 .navbar-global-spacer {
-  @apply h-[160px];
+  @apply h-[90px] md:h-[120px];
 }
 
-@media (max-width: 768px) {
-  .navbar-global-spacer {
-    @apply h-[140px];
+/* Optimización de animaciones y rendimiento */
+@layer base {
+  *, *::before, *::after {
+    @apply motion-reduce:transition-none motion-reduce:animate-none;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply font-ubuntu leading-relaxed bg-dark text-light;
+  }
+}
+
+@layer components {
+  .glow-text {
+    @apply drop-shadow-[0_0_5px_rgb(234,96,26)] filter;
+    text-shadow: 0 0 5px rgb(234, 96, 26, 0.5), 0 0 10px rgb(234, 96, 26, 0.3);
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-primary hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-glow;
+  }
+  
+  .card-gaming {
+    @apply bg-gradient-to-br from-dark/80 to-gray-800/90 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow-sm;
   }
 }

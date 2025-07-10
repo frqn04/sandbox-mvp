@@ -1,47 +1,122 @@
-<nav class="navbar relative" role="navigation" aria-label="Menú principal">
-  <div class="navbar-border-top absolute top-0 left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_var(--primary-color),0_0_20px_var(--primary-color)]"></div>
-  <div class="navbar-content flex justify-between items-center flex-wrap gap-10 max-w-[1400px] mx-auto px-5 relative overflow-visible">
+<nav class="font-ubuntu fixed top-0 left-0 w-full z-[1000] bg-black/70 backdrop-blur-[10px] backdrop-saturate-[120%] shadow-[0_4px_12px_rgba(0,0,0,0.35)] py-2 md:py-3 border border-white/10 transition-colors duration-300" role="navigation" aria-label="Menú principal">
+  <div class="absolute top-0 left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_rgb(234,96,26),0_0_20px_rgb(234,96,26)]"></div>
+  <div class="flex justify-between items-center max-w-[1400px] mx-auto px-3 md:px-5 relative">
+    
+    <!-- Mobile menu button -->
+    <button class="md:hidden text-white text-xl order-1" id="mobile-menu-btn" aria-label="Abrir menú">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
-    <!-- Social Icons -->
-    <div class="social-icons-container flex gap-4 order-3 pr-0">
-      <a href="#" aria-label="Facebook" class="social-icon">
+    <!-- Logo -->
+    <a href="/" class="order-2 md:order-1 transition-transform duration-300 hover:scale-105">
+      <img src="/logopucara.png" alt="Pucará Gaming Logo" class="h-[80px] md:h-[100px] lg:h-[110px] transition-all duration-300 filter drop-shadow-[0_4px_8px_rgba(234,96,26,0.5)]" />
+    </a>
+
+    <!-- Social Icons - Desktop only -->
+    <div class="hidden md:flex gap-4 order-3">
+      <a href="#" aria-label="Facebook" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <i class="fa-brands fa-facebook-f"></i>
       </a>
-      <a href="#" aria-label="X (Twitter)" class="social-icon">
+      <a href="#" aria-label="X (Twitter)" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <!-- Logo X actualizado -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
           <path d="M23.954 4.569c-.885.39-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.724-.949.564-2.005.974-3.127 1.195-.897-.959-2.178-1.559-3.594-1.559-2.723 0-4.928 2.206-4.928 4.928 0 .39.045.765.127 1.124-4.094-.205-7.725-2.165-10.158-5.144-.424.729-.666 1.577-.666 2.476 0 1.708.87 3.216 2.188 4.099-.807-.026-1.566-.247-2.228-.616v.062c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.927-.086.627 1.956 2.444 3.379 4.6 3.419-1.68 1.318-3.809 2.105-6.102 2.105-.396 0-.787-.023-1.175-.068 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14-7.496 14-13.986 0-.21 0-.423-.015-.633.962-.695 1.8-1.562 2.46-2.549z"/>
         </svg>
       </a>
-      <a href="#" aria-label="Instagram" class="social-icon">
+      <a href="#" aria-label="Instagram" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <i class="fa-brands fa-instagram"></i>
       </a>
-      <a href="#" aria-label="YouTube" class="social-icon">
+      <a href="#" aria-label="YouTube" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <i class="fa-brands fa-youtube"></i>
       </a>
-      <a href="#" aria-label="Twitch" class="social-icon">
+      <a href="#" aria-label="Twitch" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <i class="fa-brands fa-twitch"></i>
       </a>
-      <a href="#" aria-label="TikTok" class="social-icon">
+      <a href="#" aria-label="TikTok" class="text-white text-base transition-all duration-300 hover:text-primary hover:-translate-y-1">
         <i class="fa-brands fa-tiktok"></i>
       </a>
     </div>
 
-    <!-- Logo -->
-    <a class="navbar-logo order-1 ml-[-20px]">
-      <img src="/logopucara.png" alt="Pucará Gaming Logo" class="h-[140px] transition-all duration-300 filter drop-shadow-[0_2px_5px_rgba(255,87,34,0.5)] drop-shadow-[0_0_8px_rgba(0,0,0,0.6)]" />
-    </a>
-
-    <!-- Menú -->
-    <div class="navbar-links flex gap-[35px] order-2 justify-center">
-      <a href="/home" class="nav-link">INICIO</a>
-      <a href="/about" class="nav-link">SOBRE NOSOTROS</a>
-      <a href="#" class="nav-link">EQUIPOS</a>
-      <a href="#" class="nav-link">NOTICIAS</a>
-      <a href="/store" target="_blank" class="nav-link">TIENDA</a>
-      <a href="/contact" class="nav-link">CONTACTO</a>
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex gap-[25px] lg:gap-[35px] order-2">
+      <a href="/home" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">INICIO</a>
+      <a href="/about" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">NOSOTROS</a>
+      <a href="/teams" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">EQUIPOS</a>
+      <a href="/news" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">NOTICIAS</a>
+      <a href="/store" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">TIENDA</a>
+      <a href="/contact" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">CONTACTO</a>
     </div>
 
   </div>
-  <div class="navbar-border-bottom absolute bottom-0 left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_var(--primary-color),0_0_20px_var(--primary-color)]"></div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden fixed top-[90px] left-0 w-full bg-black/95 backdrop-blur-lg transform -translate-y-full opacity-0 transition-all duration-300 z-50" id="mobile-menu">
+    <div class="px-5 py-6">
+      <!-- Mobile Navigation -->
+      <div class="flex flex-col gap-4 mb-6">
+        <a href="/home" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">INICIO</a>
+        <a href="/about" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">NOSOTROS</a>
+        <a href="/teams" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">EQUIPOS</a>
+        <a href="/news" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">NOTICIAS</a>
+        <a href="/store" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">TIENDA</a>
+        <a href="/contact" class="text-white text-lg font-semibold uppercase tracking-wider py-2 border-b border-white/10 hover:text-primary transition-colors">CONTACTO</a>
+      </div>
+      
+      <!-- Mobile Social Icons -->
+      <div class="flex gap-6 justify-center">
+        <a href="#" aria-label="Facebook" class="text-white text-xl hover:text-primary transition-colors">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="#" aria-label="X (Twitter)" class="text-white text-xl hover:text-primary transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path d="M23.954 4.569c-.885.39-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.724-.949.564-2.005.974-3.127 1.195-.897-.959-2.178-1.559-3.594-1.559-2.723 0-4.928 2.206-4.928 4.928 0 .39.045.765.127 1.124-4.094-.205-7.725-2.165-10.158-5.144-.424.729-.666 1.577-.666 2.476 0 1.708.87 3.216 2.188 4.099-.807-.026-1.566-.247-2.228-.616v.062c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.927-.086.627 1.956 2.444 3.379 4.6 3.419-1.68 1.318-3.809 2.105-6.102 2.105-.396 0-.787-.023-1.175-.068 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14-7.496 14-13.986 0-.21 0-.423-.015-.633.962-.695 1.8-1.562 2.46-2.549z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="text-white text-xl hover:text-primary transition-colors">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#" aria-label="YouTube" class="text-white text-xl hover:text-primary transition-colors">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="#" aria-label="Twitch" class="text-white text-xl hover:text-primary transition-colors">
+          <i class="fa-brands fa-twitch"></i>
+        </a>
+        <a href="#" aria-label="TikTok" class="text-white text-xl hover:text-primary transition-colors">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_rgb(234,96,26),0_0_20px_rgb(234,96,26)]"></div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn?.addEventListener('click', () => {
+      const isOpen = mobileMenu?.classList.contains('translate-y-0');
+      
+      if (isOpen) {
+        mobileMenu?.classList.remove('translate-y-0', 'opacity-100');
+        mobileMenu?.classList.add('-translate-y-full', 'opacity-0');
+        if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      } else {
+        mobileMenu?.classList.remove('-translate-y-full', 'opacity-0');
+        mobileMenu?.classList.add('translate-y-0', 'opacity-100');
+        if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fa-solid fa-times"></i>';
+      }
+    });
+
+    // Close mobile menu when clicking on links
+    const mobileLinks = mobileMenu?.querySelectorAll('a');
+    mobileLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.remove('translate-y-0', 'opacity-100');
+        mobileMenu?.classList.add('-translate-y-full', 'opacity-0');
+        if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+  </script>
 </nav>

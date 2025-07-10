@@ -1,68 +1,43 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getAllTeams } from "../../data/teams";
 
-// Simulamos los datos globales de los equipos
-const teamsData = [
-  {
-    id: "dota-2",
-    nombre: "DOTA 2",
-    emoji: "🛡️",
-    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
-    imagen:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-  },
-  {
-    id: "street-fighter",
-    nombre: "STREET FIGHTER",
-    emoji: "👊",
-    bgClass: "bg-gradient-to-br from-gray-900/80 to-gray-800/90",
-    imagen:
-      "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-  },
-  {
-    id: "fifa",
-    nombre: "FIFA",
-    emoji: "⚽",
-    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
-    imagen:
-      "https://images.pexels.com/photos/1484794/pexels-photo-1484794.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
-  },
-];
+// Obtener todos los equipos desde el archivo de datos centralizado
+const teams = getAllTeams();
 ---
 
-<Layout title="Nuestros Equipos">
-  <main class="min-h-screen pt-20 bg-dark text-light">
-    <section class="text-center py-32">
+<Layout 
+    title="Equipos - Pucará Gaming | Dota 2, Street Fighter y Más"
+    description="Conoce todos los equipos de Pucará Gaming. Nuestros roster profesionales de Dota 2, Street Fighter 6, Tekken 8 y League of Legends. Los mejores jugadores argentinos compitiendo al más alto nivel."
+    keywords="equipos pucara gaming, dota 2 team, street fighter team, tekken team, league of legends, roster gaming, jugadores profesionales argentina"
+>
+  <main class="font-ubuntu min-h-screen bg-dark text-light">
+    
+    <section class="text-center py-20">
       <div class="max-w-6xl mx-auto px-5">
-        <h1
-          class="text-6xl font-bold uppercase tracking-wider mb-10 bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent drop-shadow-lg"
-        >
+        <h1 class="text-4xl md:text-6xl font-bold uppercase tracking-wider mb-6 bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent drop-shadow-lg">
           NUESTROS EQUIPOS
         </h1>
+        
+        <p class="text-lg md:text-xl text-white/80 mb-12 max-w-3xl mx-auto">
+          Conocé a los profesionales que representan a Pucará Gaming en los esports más competitivos
+        </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {
-            teamsData.map((team) => (
-              <a
-                href={`/teams/${team.id}`}
-                class="group relative rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-all duration-500"
-              >
-                <div
-                  class={`h-80 ${team.bgClass} flex flex-col justify-center items-center`}
-                >
-                  <img
-                    src={team.imagen}
-                    alt={team.nombre}
-                    class="w-40 h-40 rounded-full object-cover border-4 border-primary mb-5 shadow-lg"
-                  />
-                  <h2 class="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                    {team.nombre}
-                  </h2>
-                  <div class="text-4xl mt-2">{team.emoji}</div>
-                </div>
-              </a>
-            ))
-          }
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          {teams.map((team) => (
+            <a href={`/teams/${team.id}`} class="group relative rounded-3xl overflow-hidden shadow-xl transition-all duration-500 border-2 border-primary/20 hover:border-primary/60">
+              <div class={`h-64 ${team.bgClass} flex flex-col justify-center items-center p-6`}>
+                <img src={team.imagen} alt={team.nombre} class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary mb-6 shadow-lg transition-transform duration-300" />
+                
+                <h2 class="text-2xl md:text-3xl font-bold text-primary transition-transform duration-300">
+                  {team.nombre}
+                </h2>
+              </div>
+              
+              <!-- Efecto hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+          ))}
         </div>
       </div>
     </section>
