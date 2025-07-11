@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Pucará API
+  version: 1.0.0
+  description: Documentación de la API REST de Pucará Gaming
+
+servers:
+  - url: http://localhost:3333
+
+paths:
+  /register:
+    post:
+      summary: Registro de usuarios
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - role
+              properties:
+                username:
+                  type: string
+                  example: sebasdev
+                email:
+                  type: string
+                  example: sebas@gmail.com
+                password:
+                  type: string
+                  example: 12345678
+                role:
+                  type: string
+                  enum: [admin, client, editor]
+      responses:
+        '201':
+          description: Usuario registrado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      role:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+        '400':
+          description: Email o username ya en uso
+        '422':
+          description: Validación fallida
