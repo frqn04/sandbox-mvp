@@ -13,7 +13,7 @@ export interface Props {
 
 const { 
 	title, 
-	description = "Pucará Gaming: la organización de esports líder en Argentina. Equipos profesionales de Dota 2, Street Fighter, Tekken y más. Únete a nuestra comunidad gaming.",
+	description = "Pucará Gaming: la organización de esports líder en Argentina. Equipos profesionales de Dota 2, Street Fighter, Tekken y más. Sumate a nuestra comunidad gaming.",
 	keywords = "pucara gaming, esports argentina, dota 2, street fighter, gaming, esports, tournaments, argentina gaming, competitive gaming",
 	ogImage = "/herobanner.png"
 } = Astro.props;
@@ -61,6 +61,10 @@ const {
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+		
+		<!-- Preload critical resources -->
+		<link rel="preload" href="/logopucara.png" as="image" type="image/png" />
+		<link rel="preload" href="/pucarahero.png" as="image" type="image/png" />
 		
 		<!-- Preload critical fonts -->
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
