@@ -1,15 +1,26 @@
-<section class="hero"></section>
+---
+// Hero component responsive - Solo imagen optimizada
+---
 
-<style>
-
-.hero {
-    width: 100%;
-    height: auto !important; 
-    min-height: 60vh;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('/herobanner.png') center/cover fixed; 
-    position: relative;
-    margin: 0;
-    padding-top: 80px;
-}
-</style>
+<section class="relative w-full overflow-hidden">
+  <!-- Hero Container con altura responsiva -->
+  <div class="relative h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] w-full">
+    
+    <!-- Background Image responsive -->
+    <div class="absolute inset-0">
+      <picture>
+        <!-- Imagen optimizada para móvil -->
+        <source media="(max-width: 768px)" 
+                srcset="/pucarahero.png" />
+        <!-- Imagen para tablet y desktop -->
+        <source media="(min-width: 769px)" 
+                srcset="/pucarahero.png" />
+        <!-- Fallback -->
+        <img src="/pucarahero.png" 
+             alt="Pucará Gaming Hero" 
+             class="w-full h-full object-cover object-center" 
+             loading="eager" />
+      </picture>
+    </div>
+  </div>
+</section>

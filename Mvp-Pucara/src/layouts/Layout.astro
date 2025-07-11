@@ -1,40 +1,174 @@
 ---
 import '../assets/styles/global.css';
-import '../assets/styles/navbar.css';
-import '../assets/styles/footer.css';
+import { ViewTransitions } from 'astro:transitions';
 
-import Navbar from '../components/navbar.astro';
+import Navbar from '../components/Navbar.astro';
 import Footer from '../components/footer.astro';
-
-interface Props {
-    title: string;
+export interface Props {
+	title: string;
+	description?: string;
+	keywords?: string;
+	ogImage?: string;
 }
-const { title } = Astro.props as Props;
----
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pucara Gaming | {title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">      
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-</head>
-<body>
-    
-        <header>
-            <Navbar />
-        </header>
-        
-            <slot />
-        
-        <Footer />
-        
-</body>
-</html>
 
+const { 
+	title, 
+	description = "Pucará Gaming: la organización de esports líder en Argentina. Equipos profesionales de Dota 2, Street Fighter, Tekken y más. Sumate a nuestra comunidad gaming.",
+	keywords = "pucara gaming, esports argentina, dota 2, street fighter, gaming, esports, tournaments, argentina gaming, competitive gaming",
+	ogImage = "/herobanner.png"
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Pucará Gaming" />
+		<meta name="robots" content="index, follow" />
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(ogImage, Astro.url)} />
+		<meta property="og:site_name" content="Pucará Gaming" />
+		<meta property="og:locale" content="es_AR" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={Astro.url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(ogImage, Astro.url)} />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href={Astro.url} />
+
+		<!-- Preconnect to external domains -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+		
+		<!-- Preload critical resources -->
+		<link rel="preload" href="/logopucara.png" as="image" type="image/png" />
+		<link rel="preload" href="/pucarahero.png" as="image" type="image/png" />
+		
+		<!-- Preload critical fonts -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" /></noscript>
+		
+		<!-- Font Awesome with preload -->
+		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
+
+		<!-- View Transitions para SPA-like navigation -->
+		
+		<!-- Google reCAPTCHA v2 - Free up to 1 million uses per month -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		
+		<!-- View Transitions para navegación suave -->
+		<ViewTransitions />
+
+		<!-- Structured Data / JSON-LD -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "SportsOrganization",
+				"name": "Pucará Gaming",
+				"alternateName": "Pucará Digital",
+				"url": "https://pucaradigital.com",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "https://pucaradigital.com/logopucara.png",
+					"width": "400",
+					"height": "400"
+				},
+				"description": "Organización de esports argentina con equipos profesionales de múltiples disciplinas gaming: Dota 2, Street Fighter, Tekken y más.",
+				"foundingDate": "2020",
+				"location": {
+					"@type": "Place",
+					"addressCountry": "AR",
+					"addressRegion": "Argentina"
+				},
+				"sport": ["Esports", "Dota 2", "Street Fighter", "Tekken", "Gaming"],
+				"memberOf": {
+					"@type": "Organization",
+					"name": "Esports Argentina"
+				},
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"contactType": "General Inquiries",
+					"email": "info@pucaradigital.com",
+					"availableLanguage": "Spanish"
+				},
+				"sameAs": [
+					"https://instagram.com/pucaradigital",
+					"https://x.com/pucaradigital", 
+					"https://facebook.com/pucaradigital",
+					"https://twitch.tv/pucaradigital",
+					"https://youtube.com/@pucaradigital",
+					"https://tiktok.com/@pucaradigital"
+				],
+				"offers": {
+					"@type": "Offer",
+					"description": "Merchandising y productos oficiales de Pucará Gaming",
+					"availability": "https://schema.org/PreOrder"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<header>
+			<Navbar />
+		</header>
+
+		<!-- Espaciador global para compensar el navbar fijo -->
+		<div class="navbar-global-spacer"></div>
+
+		<main>
+			<slot />
+		</main>
+
+		<Footer />
+
+		<script>
+			// Script optimizado para detectar scroll y cambiar la apariencia del navbar
+			const navbar = document.querySelector('nav');
+			
+			if (navbar) {
+				let ticking = false;
+				
+				const updateNavbar = () => {
+					if (window.scrollY > 50) {
+						navbar.classList.add('scrolled');
+					} else {
+						navbar.classList.remove('scrolled');
+					}
+					ticking = false;
+				};
+
+				const onScroll = () => {
+					if (!ticking) {
+						requestAnimationFrame(updateNavbar);
+						ticking = true;
+					}
+				};
+
+				window.addEventListener('scroll', onScroll, { passive: true });
+			}
+		</script>
+	</body>
+</html>

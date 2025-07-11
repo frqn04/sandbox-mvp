@@ -1,13 +1,4 @@
 ---
-import Hero from '../components/hero.astro';
-import Layout from '../layouts/Layout.astro';
+// Redirect automático de "/" a "/home"
+return Astro.redirect("/home");
 ---
-<Layout title="Home">
-    <Hero />
-
-    <div class="container">
-
-
-    </div>
-</Layout>
-
