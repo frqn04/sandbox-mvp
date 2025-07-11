@@ -24,7 +24,7 @@ export const teamsData: Record<string, Team> = {
     emoji: "🛡️",
     bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
     descripcion: "Nuestro equipo de DOTA 2 compite en los torneos más importantes de Argentina y Latinoamérica.",
-    imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=DOTA+2",
+    imagen: "/D2banner.png",
     players: [
       { 
         nombre: "Jugador 1", 
@@ -74,7 +74,7 @@ export const teamsData: Record<string, Team> = {
     emoji: "👊",
     bgClass: "bg-gradient-to-br from-gray-900/80 to-gray-800/90",
     descripcion: "Nuestro especialista en Street Fighter compite en torneos presenciales y online representando a Pucará Gaming.",
-    imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Street+Fighter",
+    imagen: "/SFbanner.png",
     players: [
       { 
         nombre: "Jugador Pro", 
@@ -92,7 +92,7 @@ export const teamsData: Record<string, Team> = {
     emoji: "⚽",
     bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
     descripcion: "Nuestro jugador de FIFA compite en las ligas más competitivas del fútbol virtual argentino.",
-    imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=FIFA",
+    imagen: "/FC25banner.png",
     players: [
       { 
         nombre: "Jugador FIFA", 

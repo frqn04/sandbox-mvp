@@ -63,5 +63,10 @@ module.exports = {
       }
     },
   },
+  // Optimizaciones de performance
+  corePlugins: {
+    // Deshabilitar plugins no utilizados para reducir tamaño del CSS
+    preflight: true,
+  },
   plugins: [],
 }
