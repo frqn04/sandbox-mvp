@@ -5,12 +5,13 @@
 /* Variables CSS personalizadas para referencia */
 :root {
   --primary-color: #ea601a;
+  --primary-bg-subtle: rgba(234, 96, 26, 0.08);
   --dark-color: #000000;
   --light-color: #FFFFFF;
   --transition: all 0.3s ease;
 }
 
-/* Espaciador para compensar el navbar fijo usando Tailwind con @apply */
+
 .navbar-global-spacer {
   @apply h-[90px] md:h-[120px];
 }
@@ -42,6 +43,11 @@
   
   .card-gaming {
     @apply bg-gradient-to-br from-dark/80 to-gray-800/90 rounded-xl p-6 border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-glow-sm;
+  }
+
+  /* Color suave para fondos */
+  .bg-primary-subtle {
+    background-color: var(--primary-bg-subtle);
   }
 
   /* Scrollbar personalizado para tema gaming con efecto RGB */

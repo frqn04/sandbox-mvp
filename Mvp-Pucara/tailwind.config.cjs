@@ -9,6 +9,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      screens: {
+        '3xl': '1920px', // TV 1080p y monitores gaming grandes
+      },
       fontFamily: {
         ubuntu: ['Ubuntu', 'sans-serif'],
       },
@@ -23,6 +26,7 @@ module.exports = {
           900: '#9a3412',
         },
         dark: '#000000',
+        'dark-subtle': '#1a1a1a',
         light: '#FFFFFF',
       },
       boxShadow: {
