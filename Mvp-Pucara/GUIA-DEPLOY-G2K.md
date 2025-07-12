@@ -230,7 +230,75 @@ https://tudominio.com/teams/fifa/
 
 ---
 
-## 📞 **Contacto G2K**
+## � **Alternativa: Deploy en Vercel (Moderno)**
+
+> **Vercel es una plataforma moderna ideal para sitios estáticos como Astro**
+
+### **🌟 Ventajas de Vercel:**
+- **Deploy automático**: Conecta con GitHub y se actualiza solo
+- **CDN global**: Velocidad mundial automática
+- **SSL gratuito**: HTTPS incluido
+- **Dominio gratuito**: `tu-proyecto.vercel.app`
+- **Sin configuración**: Detecta Astro automáticamente
+
+### **📋 Proceso de Deploy:**
+
+#### **1. Preparación (Solo una vez):**
+```bash
+# Instalar Vercel CLI
+npm install -g vercel
+
+# Login en Vercel
+vercel login
+```
+
+#### **2. Deploy desde terminal:**
+```bash
+# En la carpeta del proyecto
+cd "C:\Users\User\Desktop\sandbox-mvp\Mvp-Pucara"
+
+# Deploy automático
+vercel
+
+# Primera vez: seguir configuración interactiva
+# Deploy automático detectará Astro y configurará todo
+```
+
+#### **3. Deploy desde GitHub (Recomendado):**
+1. **Subir código a GitHub**
+2. **Ir a vercel.com**
+3. **"New Project" → Importar desde GitHub**
+4. **Seleccionar repositorio**
+5. **Vercel detecta Astro automáticamente**
+6. **Deploy automático cada vez que hagas push**
+
+### **⚡ Comparación G2K vs Vercel:**
+
+| Característica | G2K Hosting | Vercel |
+|---------------|------------|---------|
+| **Precio** | ~$70 USD/año | Gratis (plan hobby) |
+| **Deploy** | Manual (FTP/cPanel) | Automático (Git) |
+| **Velocidad** | Servidores Argentina | CDN Global |
+| **SSL** | Incluido | Incluido |
+| **Dominio custom** | Incluido (.com gratis) | $20 USD/año |
+| **Email** | Incluido (ilimitado) | No incluido |
+| **Soporte** | Español | Inglés |
+| **Ideal para** | Clientes tradicionales | Desarrolladores |
+
+### **🎯 Recomendación:**
+
+**Para Pucará Gaming:**
+- **G2K** si necesitás email corporativo y soporte en español
+- **Vercel** si priorizás velocidad y deploy automático
+
+**Setup híbrido:**
+- **Hosting principal**: G2K (para email y dominio)
+- **CDN/Deploy**: Vercel (para velocidad)
+- **Redirigir**: `pucaraesports.com` → `pucara-gaming.vercel.app`
+
+---
+
+## �📞 **Contacto G2K**
 
 - **Soporte técnico**: Via panel de cliente
 - **Documentación**: Base de conocimientos G2K
