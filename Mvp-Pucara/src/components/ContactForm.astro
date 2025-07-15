@@ -150,13 +150,30 @@ const { className = "" } = Astro.props;
 
 </div>
 
-<script is:inline>
+<script>
+// Declaraciones de tipos globales para TypeScript
+declare global {
+  interface Window {
+    grecaptcha: {
+      render: (container: string | HTMLElement, parameters: { sitekey: string; theme: string; }) => void;
+      getResponse: () => string;
+      reset: () => void;
+    };
+    onRecaptchaLoad: () => void;
+  }
+}
+
 class ContactForm {
+  form: HTMLFormElement;
+  submitBtn: HTMLButtonElement;
+  successMessage: HTMLElement;
+  errorMessage: HTMLElement;
+
   constructor() {
-    this.form = document.getElementById('contactForm');
-    this.submitBtn = document.getElementById('submitBtn');
-    this.successMessage = document.getElementById('successMessage');
-    this.errorMessage = document.getElementById('errorMessage');
+    this.form = document.getElementById('contactForm') as HTMLFormElement;
+    this.submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+    this.successMessage = document.getElementById('successMessage') as HTMLElement;
+    this.errorMessage = document.getElementById('errorMessage') as HTMLElement;
     this.init();
   }
 
@@ -170,21 +187,21 @@ class ContactForm {
     this.setupCharacterCounter();
     
     // Envío del formulario
-    this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    this.form.addEventListener('submit', (e: SubmitEvent) => this.handleSubmit(e));
   }
 
   setupRealTimeValidation() {
     const inputs = this.form.querySelectorAll('input, select, textarea');
     
     inputs.forEach(input => {
-      input.addEventListener('blur', () => this.validateField(input));
-      input.addEventListener('input', () => this.clearError(input));
+      input.addEventListener('blur', () => this.validateField(input as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement));
+      input.addEventListener('input', () => this.clearError(input as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement));
     });
   }
 
   setupCharacterCounter() {
-    const textarea = document.getElementById('mensaje');
-    const counter = document.querySelector('.character-count');
+    const textarea = document.getElementById('mensaje') as HTMLTextAreaElement;
+    const counter = document.querySelector('.character-count') as HTMLElement;
     
     if (textarea && counter) {
       textarea.addEventListener('input', () => {
@@ -195,8 +212,8 @@ class ContactForm {
     }
   }
 
-  validateField(field) {
-    const errorDiv = field.parentElement.querySelector('.error-message');
+  validateField(field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement): boolean {
+    const errorDiv = field.parentElement?.querySelector('.error-message') as HTMLElement | null;
     let isValid = true;
     let errorMessage = '';
 
@@ -240,7 +257,7 @@ class ContactForm {
         break;
 
       case 'checkbox':
-        if (!field.checked) {
+        if (!(field as HTMLInputElement).checked) {
           isValid = false;
           errorMessage = 'Debes aceptar los términos y condiciones';
         }
@@ -263,8 +280,8 @@ class ContactForm {
     return isValid;
   }
 
-  clearError(field) {
-    const errorDiv = field.parentElement.querySelector('.error-message');
+  clearError(field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+    const errorDiv = field.parentElement?.querySelector('.error-message');
     if (errorDiv) {
       errorDiv.classList.add('hidden');
       field.classList.remove('border-red-500');
@@ -272,25 +289,24 @@ class ContactForm {
     }
   }
 
-  validateForm() {
+  validateForm(): boolean {
     const inputs = this.form.querySelectorAll('input[required], select[required], textarea[required]');
     let isValid = true;
 
     inputs.forEach(input => {
-      if (!this.validateField(input)) {
+      if (!this.validateField(input as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)) {
         isValid = false;
       }
     });
 
     // Validar reCAPTCHA
-    if (typeof window.grecaptcha !== 'undefined') {
+    if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.getResponse) {
       const recaptchaResponse = window.grecaptcha.getResponse();
+      const captchaError = document.getElementById('captcha-error');
       if (!recaptchaResponse) {
-        const captchaError = document.getElementById('captcha-error');
         if (captchaError) captchaError.classList.remove('hidden');
         isValid = false;
       } else {
-        const captchaError = document.getElementById('captcha-error');
         if (captchaError) captchaError.classList.add('hidden');
       }
     }
@@ -298,7 +314,7 @@ class ContactForm {
     return isValid;
   }
 
-  async handleSubmit(e) {
+  async handleSubmit(e: SubmitEvent) {
     e.preventDefault();
     
     if (!this.validateForm()) {
@@ -311,12 +327,12 @@ class ContactForm {
       const formData = new FormData(this.form);
       
       // Convertir FormData a objeto
-      const formObject = Object.fromEntries(formData);
+      const formObject: { [key: string]: any } = Object.fromEntries(formData);
       
       // Agregar timestamp
       formObject.timestamp = new Date().toISOString();
       
-      let response;
+      let response: Response | { ok: boolean; status: number };
       
       // Si estamos en desarrollo, usar simulación
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -329,7 +345,7 @@ class ContactForm {
         // Simular delay de red
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        response = { ok: true };
+        response = { ok: true, status: 200 };
       } else {
         // Para producción, enviar datos a la API de Vercel
         response = await fetch('/api/contact', {
@@ -349,7 +365,10 @@ class ContactForm {
         }
       } else {
         // Intentar obtener el error específico de la API
-        const errorData = await response.json().catch(() => ({}));
+        let errorData = {};
+        if ('json' in response && typeof response.json === 'function') {
+          errorData = await response.json().catch(() => ({ message: 'Error parsing server response' }));
+        }
         console.error('Error del servidor:', errorData);
         this.showError();
       }
@@ -361,17 +380,17 @@ class ContactForm {
     }
   }
 
-  setLoadingState(loading) {
+  setLoadingState(loading: boolean) {
     const btnText = this.submitBtn.querySelector('.btn-text');
     const loadingText = this.submitBtn.querySelector('.loading-text');
     
     if (loading) {
-      btnText.classList.add('hidden');
-      loadingText.classList.remove('hidden');
+      if (btnText) btnText.classList.add('hidden');
+      if (loadingText) loadingText.classList.remove('hidden');
       this.submitBtn.disabled = true;
     } else {
-      btnText.classList.remove('hidden');
-      loadingText.classList.add('hidden');
+      if (btnText) btnText.classList.remove('hidden');
+      if (loadingText) loadingText.classList.add('hidden');
       this.submitBtn.disabled = false;
     }
   }
@@ -403,46 +422,54 @@ class ContactForm {
   }
 }
 
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeForm);
-} else {
-  initializeForm();
-}
-
-function initializeForm() {
-  // Esperar a que reCAPTCHA esté disponible
-  if (typeof window.grecaptcha !== 'undefined') {
-    new ContactForm();
-  } else {
-    // Esperar un poco más y reintentar
-    setTimeout(() => {
-      if (typeof window.grecaptcha !== 'undefined') {
-        new ContactForm();
-      } else {
-        // Si aún no está disponible, inicializar sin reCAPTCHA
-        console.warn('reCAPTCHA no disponible, iniciando sin él');
-        new ContactForm();
-      }
-    }, 1000);
-  }
-}
-
-// Callback global para cuando reCAPTCHA esté listo
-window.onRecaptchaLoad = function() {
-  console.log('reCAPTCHA loaded successfully');
-  // Renderizar explícitamente el reCAPTCHA
-  const recaptchaContainer = document.getElementById('recaptcha-container');
-  if (recaptchaContainer) {
-    grecaptcha.render(recaptchaContainer, {
-      'sitekey': '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki'
+/**
+ * Renderiza el reCAPTCHA en el contenedor designado.
+ * Se asegura de no renderizarlo múltiples veces en el mismo contenedor.
+ */
+function renderRecaptcha() {
+  const container = document.getElementById('recaptcha-container');
+  // Verificar si el contenedor existe y no ha sido ya renderizado
+  if (container && container.innerHTML.trim() === '') {
+    console.log('Rendering reCAPTCHA...');
+    window.grecaptcha.render(container, {
+      'sitekey': '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki',
+      'theme': 'dark' // Tema oscuro para que coincida con el diseño
     });
   }
-  // Inicializar el formulario después de que reCAPTCHA esté listo
-  if (typeof ContactForm !== 'undefined') {
-    new ContactForm();
-  }
+}
+
+/**
+ * Callback global que se ejecuta cuando el script de reCAPTCHA de Google se ha cargado.
+ */
+window.onRecaptchaLoad = function() {
+  console.log('reCAPTCHA API script loaded.');
+  renderRecaptcha();
 };
+
+/**
+ * Función principal de inicialización.
+ * Se ejecuta en cada carga de página gracias a las transiciones de Astro.
+ */
+function initialize() {
+  // Inicializar el formulario principal
+  const form = document.getElementById('contactForm');
+  if (form && !form.hasAttribute('data-initialized')) {
+    new ContactForm();
+    form.setAttribute('data-initialized', 'true');
+  }
+
+  // Si la API de grecaptcha ya está cargada, renderizar el widget.
+  // Esto es útil para navegaciones posteriores donde el script ya está en memoria.
+  if (typeof window.grecaptcha !== 'undefined' && typeof window.grecaptcha.render === 'function') {
+    renderRecaptcha();
+  }
+}
+
+// Usar el evento 'astro:page-load' que es compatible con ViewTransitions
+document.addEventListener('astro:page-load', initialize);
+
+// Llamada inicial por si el evento ya pasó
+initialize();
 </script>
 
 <style>
