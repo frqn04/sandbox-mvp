@@ -22,7 +22,7 @@ export const teamsData: Record<string, Team> = {
     id: "dota-2",
     nombre: "DOTA 2",
     emoji: "🛡️",
-    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
+    bgClass: "bg-primary-subtle",
     descripcion: "Nuestro equipo de DOTA 2 compite en los torneos más importantes de Argentina y Latinoamérica.",
     imagen: "/D2banner.png",
     players: [
@@ -72,17 +72,17 @@ export const teamsData: Record<string, Team> = {
     id: "street-fighter",
     nombre: "STREET FIGHTER",
     emoji: "👊",
-    bgClass: "bg-gradient-to-br from-gray-900/80 to-gray-800/90",
+    bgClass: "bg-primary-subtle",
     descripcion: "Nuestro especialista en Street Fighter compite en torneos presenciales y online representando a Pucará Gaming.",
     imagen: "/SFbanner.png",
     players: [
       { 
-        nombre: "Jugador Pro", 
+        nombre: "Neokyo", 
         edad: 28, 
         nacionalidad: "🇦🇷 Argentina", 
         rol: "Fighter", 
-        instagram: "jugadorpro", 
-        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+Pro" 
+        instagram: "dgoitea", 
+        imagen: "/players/neokyo.png" 
       },
     ],
   },
@@ -90,7 +90,7 @@ export const teamsData: Record<string, Team> = {
     id: "fifa",
     nombre: "FIFA",
     emoji: "⚽",
-    bgClass: "bg-gradient-to-br from-dark to-gray-900/80",
+    bgClass: "bg-primary-subtle",
     descripcion: "Nuestro jugador de FIFA compite en las ligas más competitivas del fútbol virtual argentino.",
     imagen: "/FC25banner.png",
     players: [

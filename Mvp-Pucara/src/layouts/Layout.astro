@@ -1,9 +1,10 @@
 ---
 import '../assets/styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/footer.astro';
+import GamingRouter from '../components/GamingRouter.astro';
 export interface Props {
 	title: string;
 	description?: string;
@@ -14,7 +15,7 @@ export interface Props {
 const { 
 	title, 
 	description = "Pucará Gaming: la organización de esports líder en Argentina. Equipos profesionales de Dota 2, Street Fighter, Tekken y más. Sumate a nuestra comunidad gaming.",
-	keywords = "pucara gaming, esports argentina, dota 2, street fighter, gaming, esports, tournaments, argentina gaming, competitive gaming",
+	keywords = "pucara gaming, esports argentina, dota 2, street fighter, gaming, esports, tournaments, argentina gaming, competitive gaming, Pucara, pucara, PUCARA",
 	ogImage = "/herobanner.png"
 } = Astro.props;
 ---
@@ -79,8 +80,42 @@ const {
 		<!-- Google reCAPTCHA v2 - Free up to 1 million uses per month -->
 		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 		
-		<!-- View Transitions para navegación suave -->
-		<ViewTransitions />
+		<!-- Client Router para navegación suave -->
+		<ClientRouter fallback="none" />
+
+		<!-- Transiciones específicas para gaming -->
+		<style>
+			/* Efectos de hover mejorados para navegación */
+			.gaming-nav-effect {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.gaming-nav-effect::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255,107,26,0.2), transparent);
+				transition: left 0.5s;
+			}
+
+			.gaming-nav-effect:hover::after {
+				left: 100%;
+			}
+
+			/* Evitar pantallazos blancos */
+			html, body {
+				background-color: #000;
+			}
+			
+			/* Eliminar cualquier transición que pueda causar pantallazos */
+			* {
+				transition: none !important;
+			}
+		</style>
 
 		<!-- Structured Data / JSON-LD -->
 		<script type="application/ld+json">
@@ -143,6 +178,9 @@ const {
 		</main>
 
 		<Footer />
+
+		<!-- Gaming Router Enhancements -->
+		<GamingRouter />
 
 		<script>
 			// Script optimizado para detectar scroll y cambiar la apariencia del navbar

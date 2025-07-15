@@ -1,0 +1,494 @@
+---
+// ContactForm Island Component
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class="contact-form-container">
+  <form 
+    id="contactForm" 
+    class="flex flex-col gap-6" 
+    method="POST" 
+    role="form" 
+    aria-labelledby="form-title">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="form-group">
+        <label for="nombre" class="block mb-2 font-semibold text-white">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required
+          class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
+          placeholder="Tu nombre" 
+          aria-describedby="nombre-help"
+          autocomplete="given-name" />
+        <span id="nombre-help" class="sr-only">Ingresá tu nombre</span>
+        <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+      </div>
+      <div class="form-group">
+        <label for="apellido" class="block mb-2 font-semibold text-white">Apellido</label>
+        <input type="text" id="apellido" name="apellido" required
+          class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
+          placeholder="Tu apellido" 
+          aria-describedby="apellido-help"
+          autocomplete="family-name" />
+        <span id="apellido-help" class="sr-only">Ingresá tu apellido</span>
+        <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="block mb-2 font-semibold text-white">Email</label>
+      <input type="email" id="email" name="email" required
+        class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
+        placeholder="tu@email.com" 
+        aria-describedby="email-help"
+        autocomplete="email" />
+      <span id="email-help" class="sr-only">Ingresá tu dirección de correo electrónico válida</span>
+      <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="motivo" class="block mb-2 font-semibold text-white">Motivo del contacto</label>
+      <select id="motivo" name="motivo" required
+        class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition appearance-none bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%23ffffff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e')] bg-no-repeat bg-right-3 bg-center pr-10"
+        aria-describedby="motivo-help">
+        <option value="">Seleccioná una opción</option>
+        <option value="press" class="bg-gray-800 text-white">Prensa</option>
+        <option value="partner-sponsor" class="bg-gray-800 text-white">Quiero ser Partner/Sponsor</option>
+        <option value="player" class="bg-gray-800 text-white">Quiero ser jugador</option>
+        <option value="work" class="bg-gray-800 text-white">Quiero trabajar en PUCARA</option>
+        <option value="other" class="bg-gray-800 text-white">Otro</option>
+      </select>
+      <span id="motivo-help" class="sr-only">Seleccioná el tipo de consulta que mejor describe tu mensaje</span>
+      <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="mensaje" class="block mb-2 font-semibold text-white">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="5" required
+        class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition resize-none"
+        placeholder="Contanos más sobre tu consulta..."
+        aria-describedby="mensaje-help"
+        maxlength="2000"></textarea>
+      <span id="mensaje-help" class="text-xs text-white/60 mt-1">Máximo 2000 caracteres. Describí detalladamente tu consulta.</span>
+      <div class="character-count text-xs text-white/60 mt-1">0/2000 caracteres</div>
+      <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+    </div>
+
+    <!-- reCAPTCHA -->
+    <div class="form-group flex justify-center" role="group" aria-labelledby="captcha-label">
+      <div class="flex flex-col items-center">
+        <span id="captcha-label" class="sr-only">Verificación de seguridad reCAPTCHA</span>
+        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" aria-label="Verificación reCAPTCHA"></div>
+        <span id="captcha-error" class="text-red-500 text-sm mt-1 hidden" role="alert">Por favor completa la verificación reCAPTCHA.</span>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3" role="group" aria-labelledby="terms-label">
+      <input type="checkbox" id="terminos" name="terminos" required
+        class="mt-1 h-4 w-4 text-primary border-white/20 rounded focus:ring-primary focus:ring-2"
+        aria-describedby="terms-description" />
+      <label id="terms-label" for="terminos" class="text-sm text-white/80 leading-5">
+        Acepto los términos y condiciones y autorizo el tratamiento de mis datos personales para responder a mi consulta.
+      </label>
+      <span id="terms-description" class="sr-only">Campo obligatorio para aceptar términos y condiciones</span>
+      <div class="error-message hidden text-red-400 text-sm mt-1"></div>
+    </div>
+
+    <!-- Botón con loading state -->
+    <div class="flex justify-center mt-4">
+      <button type="submit" id="submitBtn"
+        class="bg-primary hover:bg-primary/80 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-glow-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        aria-describedby="submit-help">
+        <span class="btn-text">
+          <i class="fa-solid fa-paper-plane mr-2" aria-hidden="true"></i>
+          Enviar mensaje
+        </span>
+        <span class="loading-text hidden">
+          <i class="fa-solid fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+          Enviando...
+        </span>
+      </button>
+      <span id="submit-help" class="sr-only">Enviar formulario de contacto a Pucará Gaming</span>
+    </div>
+  </form>
+
+  <!-- Mensaje de éxito -->
+  <div id="successMessage" class="hidden mt-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-center">
+    <i class="fa-solid fa-check-circle mr-2"></i>
+    ¡Mensaje enviado exitosamente! Te responderemos pronto.
+  </div>
+
+  <!-- Mensaje de error -->
+  <div id="errorMessage" class="hidden mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-center">
+    <i class="fa-solid fa-exclamation-triangle mr-2"></i>
+    Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.
+  </div>
+</div>
+
+<!-- Pop-up de éxito -->
+<div id="successPopup" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+  <div class="bg-black/90 border-2 border-green-500/50 rounded-2xl p-8 max-w-md mx-4 shadow-2xl shadow-green-500/20 animate-bounce-in">
+    <div class="text-center">
+      <div class="mb-4">
+        <i class="fa-solid fa-check-circle text-6xl text-green-400 animate-pulse"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-green-400 mb-2">¡Mensaje Enviado!</h3>
+      <p class="text-white/90 mb-4">
+        Gracias por contactarte con <span class="text-primary font-semibold">Pucará Gaming</span>. 
+        Te responderemos en 24-48 horas.
+      </p>
+      <div class="text-sm text-white/60">
+        <i class="fa-solid fa-spinner fa-spin mr-2"></i>
+        Cerrando automáticamente...
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script is:inline>
+class ContactForm {
+  constructor() {
+    this.form = document.getElementById('contactForm');
+    this.submitBtn = document.getElementById('submitBtn');
+    this.successMessage = document.getElementById('successMessage');
+    this.errorMessage = document.getElementById('errorMessage');
+    this.init();
+  }
+
+  init() {
+    if (!this.form) return;
+    
+    // Validación en tiempo real
+    this.setupRealTimeValidation();
+    
+    // Contador de caracteres
+    this.setupCharacterCounter();
+    
+    // Envío del formulario
+    this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+  }
+
+  setupRealTimeValidation() {
+    const inputs = this.form.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+      input.addEventListener('blur', () => this.validateField(input));
+      input.addEventListener('input', () => this.clearError(input));
+    });
+  }
+
+  setupCharacterCounter() {
+    const textarea = document.getElementById('mensaje');
+    const counter = document.querySelector('.character-count');
+    
+    if (textarea && counter) {
+      textarea.addEventListener('input', () => {
+        const count = textarea.value.length;
+        counter.textContent = `${count}/2000 caracteres`;
+        counter.classList.toggle('text-red-400', count > 2000);
+      });
+    }
+  }
+
+  validateField(field) {
+    const errorDiv = field.parentElement.querySelector('.error-message');
+    let isValid = true;
+    let errorMessage = '';
+
+    switch (field.type) {
+      case 'text':
+        if (!field.value.trim()) {
+          isValid = false;
+          errorMessage = 'Este campo es requerido';
+        } else if (field.value.trim().length < 2) {
+          isValid = false;
+          errorMessage = 'Debe tener al menos 2 caracteres';
+        }
+        break;
+
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!field.value.trim()) {
+          isValid = false;
+          errorMessage = 'El email es requerido';
+        } else if (!emailRegex.test(field.value)) {
+          isValid = false;
+          errorMessage = 'Ingresa un email válido';
+        }
+        break;
+
+      case 'select-one':
+        if (!field.value) {
+          isValid = false;
+          errorMessage = 'Selecciona una opción';
+        }
+        break;
+
+      case 'textarea':
+        if (!field.value.trim()) {
+          isValid = false;
+          errorMessage = 'El mensaje es requerido';
+        } else if (field.value.trim().length < 10) {
+          isValid = false;
+          errorMessage = 'El mensaje debe tener al menos 10 caracteres';
+        }
+        break;
+
+      case 'checkbox':
+        if (!field.checked) {
+          isValid = false;
+          errorMessage = 'Debes aceptar los términos y condiciones';
+        }
+        break;
+    }
+
+    if (errorDiv) {
+      if (isValid) {
+        errorDiv.classList.add('hidden');
+        field.classList.remove('border-red-500');
+        field.classList.add('border-white/20');
+      } else {
+        errorDiv.textContent = errorMessage;
+        errorDiv.classList.remove('hidden');
+        field.classList.add('border-red-500');
+        field.classList.remove('border-white/20');
+      }
+    }
+
+    return isValid;
+  }
+
+  clearError(field) {
+    const errorDiv = field.parentElement.querySelector('.error-message');
+    if (errorDiv) {
+      errorDiv.classList.add('hidden');
+      field.classList.remove('border-red-500');
+      field.classList.add('border-white/20');
+    }
+  }
+
+  validateForm() {
+    const inputs = this.form.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+
+    inputs.forEach(input => {
+      if (!this.validateField(input)) {
+        isValid = false;
+      }
+    });
+
+    // Validar reCAPTCHA
+    if (typeof window.grecaptcha !== 'undefined') {
+      const recaptchaResponse = window.grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        const captchaError = document.getElementById('captcha-error');
+        if (captchaError) captchaError.classList.remove('hidden');
+        isValid = false;
+      } else {
+        const captchaError = document.getElementById('captcha-error');
+        if (captchaError) captchaError.classList.add('hidden');
+      }
+    }
+
+    return isValid;
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.setLoadingState(true);
+    
+    try {
+      const formData = new FormData(this.form);
+      
+      // Convertir FormData a objeto
+      const formObject = Object.fromEntries(formData);
+      
+      // Agregar timestamp
+      formObject.timestamp = new Date().toISOString();
+      
+      let response;
+      
+      // Si estamos en desarrollo, usar simulación
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        // Para desarrollo, simular envío exitoso
+        console.log('=== FORMULARIO DE CONTACTO (DESARROLLO) ===');
+        console.log('Datos enviados:', formObject);
+        console.log('Email destino: francisgcastellano1@gmail.com');
+        console.log('=======================================');
+        
+        // Simular delay de red
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        response = { ok: true };
+      } else {
+        // Para producción, enviar datos a la API de Vercel
+        response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formObject)
+        });
+      }
+
+      if (response.ok) {
+        this.showSuccessPopup();
+        this.form.reset();
+        if (typeof window.grecaptcha !== 'undefined') {
+          window.grecaptcha.reset();
+        }
+      } else {
+        // Intentar obtener el error específico de la API
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Error del servidor:', errorData);
+        this.showError();
+      }
+    } catch (error) {
+      console.error('Error enviando formulario:', error);
+      this.showError();
+    } finally {
+      this.setLoadingState(false);
+    }
+  }
+
+  setLoadingState(loading) {
+    const btnText = this.submitBtn.querySelector('.btn-text');
+    const loadingText = this.submitBtn.querySelector('.loading-text');
+    
+    if (loading) {
+      btnText.classList.add('hidden');
+      loadingText.classList.remove('hidden');
+      this.submitBtn.disabled = true;
+    } else {
+      btnText.classList.remove('hidden');
+      loadingText.classList.add('hidden');
+      this.submitBtn.disabled = false;
+    }
+  }
+
+  showSuccess() {
+    this.successMessage.classList.remove('hidden');
+    this.errorMessage.classList.add('hidden');
+    this.successMessage.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  showError() {
+    this.errorMessage.classList.remove('hidden');
+    this.successMessage.classList.add('hidden');
+    this.errorMessage.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  showSuccessPopup() {
+    const popup = document.getElementById('successPopup');
+    if (popup) {
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+      
+      // Cerrar automáticamente después de 3 segundos
+      setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('flex');
+      }, 3000);
+    }
+  }
+}
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new ContactForm());
+} else {
+  new ContactForm();
+}
+</script>
+
+<style>
+  /* Animación para el pop-up */
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s ease-out;
+  }
+
+  /* Estilos personalizados para las opciones del select */
+  #motivo option {
+    background-color: #374151 !important;
+    color: #ffffff !important;
+    padding: 8px 12px !important;
+  }
+  
+  #motivo option:hover {
+    background-color: #4b5563 !important;
+  }
+  
+  #motivo option:checked {
+    background-color: #ea601a !important;
+    color: #ffffff !important;
+  }
+
+  /* Clase para elementos solo para lectores de pantalla */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Mejorar contraste de focus para accesibilidad */
+  input:focus, select:focus, textarea:focus, button:focus {
+    outline: 2px solid #ea601a;
+    outline-offset: 2px;
+  }
+
+  /* Mejor indicador visual para elementos requeridos */
+  label:has(+ input[required])::after,
+  label:has(+ select[required])::after,
+  label:has(+ textarea[required])::after {
+    content: " *";
+    color: #ea601a;
+    font-weight: bold;
+  }
+
+  /* Animaciones para mensajes */
+  #successMessage, #errorMessage {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

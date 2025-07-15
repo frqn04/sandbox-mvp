@@ -2,7 +2,7 @@
 // Navbar con mobile menu funcional
 ---
 
-<nav class="font-ubuntu fixed top-0 left-0 w-full z-[1000] bg-black/70 backdrop-blur-[10px] backdrop-saturate-[120%] shadow-[0_4px_12px_rgba(0,0,0,0.35)] py-1 md:py-2 border border-white/10 transition-all duration-500 ease-in-out" id="navbar" role="navigation" aria-label="Menú principal">
+<nav class="font-ubuntu fixed top-0 left-0 w-full z-[1000] bg-black/70 backdrop-blur-[10px] backdrop-saturate-[120%] shadow-[0_4px_12px_rgba(0,0,0,0.35)] py-1 md:py-2 border border-white/10 transition-all duration-500 ease-in-out" id="navbar" role="navigation" aria-label="Menú principal" transition:persist="main-navbar">
   <!-- Barra superior naranja -->
   <div class="absolute top-0 left-0 w-full h-[3px] bg-primary shadow-[0_0_10px_rgb(234,96,26),0_0_20px_rgb(234,96,26)]"></div>
   
@@ -23,8 +23,8 @@
     </button>
 
     <!-- Logo - Centrado en móvil, izquierda en desktop -->
-    <a href="/home" class="order-2 md:order-1 transition-transform duration-300 z-40 relative">
-      <img src="/logopucara.png" alt="Pucará Gaming Logo" class="h-[85px] md:h-[100px] lg:h-[115px] xl:h-[125px] transition-all duration-500 ease-in-out filter drop-shadow-[0_4px_8px_rgba(234,96,26,0.5)]" id="navbar-logo" loading="eager" fetchpriority="high" decoding="async" />
+    <a href="/home" class="order-2 md:order-1 transition-transform duration-300 z-40 relative" transition:persist="navbar-logo-link">
+      <img src="/logopucara.png" alt="Pucará Gaming Logo" class="h-[85px] md:h-[100px] lg:h-[115px] xl:h-[125px] transition-all duration-500 ease-in-out filter drop-shadow-[0_4px_8px_rgba(234,96,26,0.5)]" id="navbar-logo" loading="eager" fetchpriority="high" decoding="async" transition:persist="navbar-logo-img" />
     </a>
 
     <!-- Social Icons - Desktop only -->
@@ -75,32 +75,35 @@
 
     <!-- Desktop Menu -->
     <div class="hidden md:flex gap-[25px] lg:gap-[35px] order-2">
-      <a href="/home" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">INICIO</a>
-      <a href="/about" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">NOSOTROS</a>
-      <a href="/teams" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">EQUIPOS</a>
-      <a href="/news" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">NOTICIAS</a>
-      <a href="/store" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">TIENDA</a>
-      <a href="/contact" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full">CONTACTO</a>
+      <a href="/home" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">INICIO</a>
+      <a href="/about" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">NOSOTROS</a>
+      <a href="/teams" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">EQUIPOS</a>
+      <a href="/news" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">NOTICIAS</a>
+      <a href="/store" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">TIENDA</a>
+      <a href="/contact" class="text-white no-underline font-semibold uppercase tracking-wider transition-all duration-300 relative text-sm lg:text-base hover:text-primary after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full gaming-nav-effect">CONTACTO</a>
     </div>
 
   </div>
 
   <!-- Mobile Menu -->
   <div 
-    class="md:hidden fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-lg z-40 transition-transform duration-300 ease-in-out" 
+    class="md:hidden fixed inset-0 bg-black/95 backdrop-blur-lg z-40 transition-transform duration-300 ease-in-out overflow-y-auto" 
     id="mobile-menu"
-    style="transform: translateX(-100%);"
+    style="transform: translateX(-100%); height: 100vh; height: 100dvh; min-height: 100vh; min-height: 100dvh;"
   >
-    <div class="relative w-full h-full pt-20 px-6 flex flex-col">
+    <div class="relative w-full h-full min-h-screen pt-24 pb-20 px-6 flex flex-col justify-start">
       <!-- Mobile Navigation -->
-      <div class="flex flex-col gap-6 mb-8 mt-4">
-        <a href="/home" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">INICIO</a>
-        <a href="/about" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">NOSOTROS</a>
-        <a href="/teams" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">EQUIPOS</a>
-        <a href="/news" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">NOTICIAS</a>
-        <a href="/store" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">TIENDA</a>
-        <a href="/contact" class="text-white text-xl font-semibold uppercase tracking-wider py-3 border-b border-white/10 hover:text-primary transition-colors duration-300 block">CONTACTO</a>
+      <div class="flex flex-col gap-6 mb-8 mt-4 w-full flex-grow">
+        <a href="/home" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">INICIO</a>
+        <a href="/about" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">NOSOTROS</a>
+        <a href="/teams" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">EQUIPOS</a>
+        <a href="/news" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">NOTICIAS</a>
+        <a href="/store" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">TIENDA</a>
+        <a href="/contact" class="text-white text-xl font-semibold uppercase tracking-wider py-4 border-b border-white/10 hover:text-primary transition-colors duration-300 block">CONTACTO</a>
       </div>
+      
+      <!-- Spacer generoso para evitar que el contenido se corte -->
+      <div class="h-24 flex-shrink-0"></div>
     </div>
   </div>
 
@@ -108,7 +111,7 @@
   <div 
     class="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300" 
     id="mobile-overlay"
-    style="opacity: 0; pointer-events: none;"
+    style="opacity: 0; pointer-events: none; height: 100vh; height: 100dvh; min-height: 100vh; min-height: 100dvh;"
   ></div>
 
   <!-- Barra inferior naranja -->
@@ -147,6 +150,9 @@
 
       // Reinicialización para Astro con múltiples eventos
       document.addEventListener('astro:page-load', () => {
+        // Reset scroll state cuando cambia de página
+        this.isScrolled = false;
+        this.scrollTicking = false;
         setTimeout(() => this.safeInitNavbar(), 50);
       });
       
@@ -159,9 +165,13 @@
     }
 
     private safeInitNavbar(): void {
-      // Prevenir múltiples inicializaciones
+      // Permitir reinicialización en cambios de página
       if (this.isInitialized) {
-        return;
+        this.isInitialized = false;
+        // Limpiar listeners previos
+        if (this.elements) {
+          this.cleanupEventListeners();
+        }
       }
 
       // Intentar inicialización con retry
@@ -218,6 +228,9 @@
     private cleanupEventListeners(): void {
       if (!this.elements) return;
       
+      // Remover listeners de scroll global
+      window.removeEventListener('scroll', this.handleScrollThrottled);
+      
       // Remover listeners previos para evitar duplicados
       const newMenuButton = this.elements.menuButton.cloneNode(true) as HTMLButtonElement;
       this.elements.menuButton.parentNode?.replaceChild(newMenuButton, this.elements.menuButton);
@@ -229,8 +242,9 @@
     private setupEventListeners(): void {
       if (!this.elements) return;
 
-      // Scroll con throttling optimizado
-      window.addEventListener('scroll', () => this.handleScrollThrottled(), { passive: true });
+      // Scroll con throttling optimizado - bind para mantener contexto
+      const boundScrollHandler = this.handleScrollThrottled.bind(this);
+      window.addEventListener('scroll', boundScrollHandler, { passive: true });
       
       // Mobile menu button
       this.elements.menuButton.addEventListener('click', (e: MouseEvent) => {
@@ -327,7 +341,24 @@
       this.elements.overlay.style.pointerEvents = 'auto';
       this.elements.menuButton.classList.add('active');
       this.elements.menuButton.setAttribute('aria-expanded', 'true');
+      
+      // Prevenir scroll del body y asegurar que ocupe toda la pantalla
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
+      document.body.style.top = '0';
+      document.body.style.left = '0';
+      
+      // Forzar altura completa con múltiples estrategias
+      this.elements.mobileMenu.style.height = '100vh';
+      this.elements.mobileMenu.style.minHeight = '100vh';
+      this.elements.mobileMenu.style.maxHeight = 'none';
+      
+      // Estrategia adicional para navegadores móviles
+      const viewportHeight = window.innerHeight;
+      this.elements.mobileMenu.style.height = `${viewportHeight}px`;
+      this.elements.mobileMenu.style.minHeight = `${viewportHeight}px`;
     }
 
     private closeMenu(): void {
@@ -341,7 +372,14 @@
       this.elements.overlay.style.pointerEvents = 'none';
       this.elements.menuButton.classList.remove('active');
       this.elements.menuButton.setAttribute('aria-expanded', 'false');
+      
+      // Restaurar scroll del body
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
     }
 
     private closeMenuImmediate(): void {
@@ -353,7 +391,14 @@
       this.elements.overlay.style.pointerEvents = 'none';
       this.elements.menuButton.classList.remove('active');
       this.elements.menuButton.setAttribute('aria-expanded', 'false');
+      
+      // Restaurar scroll del body
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
     }
   }
 

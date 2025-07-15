@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm.astro";
 
 const metaDescription = "Contactanos en Pucara Gaming. Formulario de contacto para sponsors, partners, colaboraciones y consultas generales. Sumate a nuestra familia gaming o explorá oportunidades de patrocinio.";
 ---
@@ -25,95 +26,8 @@ const metaDescription = "Contactanos en Pucara Gaming. Formulario de contacto pa
           ENVIANOS TU MENSAJE
         </h2>
 
-        <!-- Formulario de contacto integrado -->
-        <form id="contactForm" class="flex flex-col gap-6" action="https://formspree.io/f/contacto" method="POST" role="form" aria-labelledby="form-title">
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="form-group">
-              <label for="nombre" class="block mb-2 font-semibold text-white">Nombre </label>
-              <input type="text" id="nombre" name="nombre" required
-                class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
-                placeholder="Tu nombre" 
-                aria-describedby="nombre-help"
-                autocomplete="given-name" />
-              <span id="nombre-help" class="sr-only">Ingresá tu nombre</span>
-            </div>
-            <div class="form-group">
-              <label for="apellido" class="block mb-2 font-semibold text-white">Apellido </label>
-              <input type="text" id="apellido" name="apellido" required
-                class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
-                placeholder="Tu apellido" 
-                aria-describedby="apellido-help"
-                autocomplete="family-name" />
-              <span id="apellido-help" class="sr-only">Ingresá tu apellido</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="block mb-2 font-semibold text-white">Email </label>
-            <input type="email" id="email" name="email" required
-              class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition"
-              placeholder="tu@email.com" 
-              aria-describedby="email-help"
-              autocomplete="email" />
-            <span id="email-help" class="sr-only">Ingresá tu dirección de correo electrónico válida</span>
-          </div>
-
-          <div class="form-group">
-            <label for="motivo" class="block mb-2 font-semibold text-white">Motivo del contacto </label>
-            <select id="motivo" name="motivo" required
-              class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition appearance-none bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%23ffffff%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e')] bg-no-repeat bg-right-3 bg-center pr-10"
-              aria-describedby="motivo-help">
-              <option value="">Seleccioná una opción</option>
-              <option value="press" class="bg-gray-800 text-white">Prensa</option>
-              <option value="partner-sponsor" class="bg-gray-800 text-white">Quiero ser Partner/Sponsor</option>
-              <option value="player" class="bg-gray-800 text-white">Quiero ser jugador</option>
-              <option value="work" class="bg-gray-800 text-white">Quiero trabajar en PUCARA</option>
-              <option value="other" class="bg-gray-800 text-white">Otro</option>
-            </select>
-            <span id="motivo-help" class="sr-only">Seleccioná el tipo de consulta que mejor describe tu mensaje</span>
-          </div>
-
-          <div class="form-group">
-            <label for="mensaje" class="block mb-2 font-semibold text-white">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" required
-              class="w-full rounded-lg border-2 border-white/20 bg-black/30 p-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary transition resize-none"
-              placeholder="Contanos más sobre tu consulta..."
-              aria-describedby="mensaje-help"
-              maxlength="2000"></textarea>
-            <span id="mensaje-help" class="text-xs text-white/60 mt-1">Máximo 2000 caracteres. Describí detalladamente tu consulta.</span>
-          </div>
-
-          <!-- reCAPTCHA con clave de prueba -->
-          <div class="form-group flex justify-center" role="group" aria-labelledby="captcha-label">
-            <div class="flex flex-col items-center">
-              <span id="captcha-label" class="sr-only">Verificación de seguridad reCAPTCHA</span>
-              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" aria-label="Verificación reCAPTCHA"></div>
-              <span id="captcha-error" class="text-red-500 text-sm mt-1 hidden" role="alert">Por favor completa la verificación reCAPTCHA.</span>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3" role="group" aria-labelledby="terms-label">
-            <input type="checkbox" id="terminos" name="terminos" required
-              class="mt-1 h-4 w-4 text-primary border-white/20 rounded focus:ring-primary focus:ring-2"
-              aria-describedby="terms-description" />
-            <label id="terms-label" for="terminos" class="text-sm text-white/80 leading-5">
-              Acepto los términos y condiciones y autorizo el tratamiento de mis datos personales para responder a mi consulta. *
-            </label>
-            <span id="terms-description" class="sr-only">Campo obligatorio para aceptar términos y condiciones</span>
-          </div>
-
-          <!-- Botón centrado -->
-          <div class="flex justify-center mt-4">
-            <button type="submit" 
-              class="bg-primary hover:bg-primary/80 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-glow-sm"
-              aria-describedby="submit-help">
-              <i class="fa-solid fa-paper-plane mr-2" aria-hidden="true"></i>
-              Enviar mensaje
-            </button>
-            <span id="submit-help" class="sr-only">Enviar formulario de contacto a Pucará Gaming</span>
-          </div>
-        </form>
+        <!-- Formulario de contacto -->
+        <ContactForm />
 
         <div class="contact-info-simple mt-12 text-center" itemscope itemtype="https://schema.org/ContactPoint">
           <h3 class="contact-subtitle text-xl font-semibold text-primary mb-4">Contactanos también por email:</h3>
@@ -185,22 +99,6 @@ const metaDescription = "Contactanos en Pucara Gaming. Formulario de contacto pa
 </Layout>
 
 <style>
-  /* Estilos personalizados para las opciones del select */
-  #motivo option {
-    background-color: #374151 !important; /* Gris más oscuro */
-    color: #ffffff !important;
-    padding: 8px 12px !important;
-  }
-  
-  #motivo option:hover {
-    background-color: #4b5563 !important; /* Gris un poco más claro en hover */
-  }
-  
-  #motivo option:checked {
-    background-color: #ea601a !important; /* Color primary cuando está seleccionado */
-    color: #ffffff !important;
-  }
-
   /* Clase para elementos solo para lectores de pantalla */
   .sr-only {
     position: absolute;
@@ -214,34 +112,14 @@ const metaDescription = "Contactanos en Pucara Gaming. Formulario de contacto pa
     border: 0;
   }
 
-  /* Mejorar contraste de focus para accesibilidad */
-  input:focus, select:focus, textarea:focus, button:focus {
-    outline: 2px solid #ea601a;
-    outline-offset: 2px;
-  }
-
   /* Asegurar que los SVGs mantengan su tamaño */
   svg {
     flex-shrink: 0;
-  }
-
-  /* Mejorar la accesibilidad del reCAPTCHA */
-  .g-recaptcha {
-    display: inline-block;
   }
 
   /* Estados de hover mejorados para accesibilidad */
   a:hover svg, a:focus svg {
     transform: scale(1.1);
     transition: transform 0.2s ease;
-  }
-
-  /* Mejor indicador visual para elementos requeridos */
-  label:has(+ input[required])::after,
-  label:has(+ select[required])::after,
-  label:has(+ textarea[required])::after {
-    content: " *";
-    color: #ea601a;
-    font-weight: bold;
   }
 </style>
