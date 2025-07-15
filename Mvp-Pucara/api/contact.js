@@ -6,31 +6,28 @@ export async function POST({ request }) {
   console.log('Request received');
   
   try {
-    // Extraer datos del formulario - Manejar tanto FormData como JSON
+    // Extraer datos del formulario - Priorizar JSON que es lo que envía el frontend
     let body;
-    const contentType = request.headers.get('content-type');
+    
+    console.log('Content-Type:', request.headers.get('content-type'));
     
     try {
-      if (contentType && contentType.includes('application/json')) {
-        body = await request.json();
-      } else if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
+      // Intentar JSON primero (que es lo que envía el ContactForm.astro)
+      body = await request.json();
+      console.log('Successfully parsed as JSON');
+    } catch (jsonError) {
+      console.log('JSON parsing failed, trying FormData:', jsonError.message);
+      try {
         const formData = await request.formData();
         body = Object.fromEntries(formData);
-      } else {
-        // Intentar FormData primero, luego JSON
-        try {
-          const formData = await request.formData();
-          body = Object.fromEntries(formData);
-        } catch {
-          body = await request.json();
-        }
+        console.log('Successfully parsed as FormData');
+      } catch (formError) {
+        console.error('Both JSON and FormData parsing failed:', formError);
+        return new Response(JSON.stringify({ error: 'Formato de datos inválido' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
-    } catch (parseError) {
-      console.error('Error parsing request:', parseError);
-      return new Response(JSON.stringify({ error: 'Formato de datos inválido' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
     }
     
     const { nombre, apellido, email, motivo, mensaje, 'g-recaptcha-response': recaptchaResponse } = body;
