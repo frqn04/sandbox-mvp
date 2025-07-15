@@ -185,7 +185,8 @@ export const POST: APIRoute = async (context) => {
     
     try {
       // Intentar JSON primero (que es lo que envía el ContactForm.astro)
-      body = await request.json() as ContactFormData;
+      const requestBody = await request.json();
+      body = requestBody as ContactFormData;
       console.log('Successfully parsed as JSON');
     } catch (jsonError) {
       console.log('JSON parsing failed, trying FormData:', (jsonError as Error).message);
