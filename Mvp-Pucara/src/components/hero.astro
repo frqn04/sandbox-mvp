@@ -4,21 +4,27 @@
 
 <section class="relative w-full overflow-hidden">
   <!-- Hero Container con altura responsiva -->
-  <div class="relative h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] w-full">
+  <div class="relative h-[45vh] xs:h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] w-full">
     
     <!-- Background Image responsive -->
     <div class="absolute inset-0">
       <picture>
-        <!-- Imagen optimizada para móvil -->
-        <source media="(max-width: 768px)" 
+        <!-- Imagen optimizada para móviles muy pequeños -->
+        <source media="(max-width: 474px)" 
+                srcset="/pucarahero.png" />
+        <!-- Imagen para móviles medianos -->
+        <source media="(min-width: 475px) and (max-width: 639px)" 
+                srcset="/pucarahero.png" />
+        <!-- Imagen para móviles grandes -->
+        <source media="(min-width: 640px) and (max-width: 767px)" 
                 srcset="/pucarahero.png" />
         <!-- Imagen para tablet y desktop -->
-        <source media="(min-width: 769px)" 
+        <source media="(min-width: 768px)" 
                 srcset="/pucarahero.png" />
         <!-- Fallback -->
         <img src="/pucarahero.png" 
              alt="Pucará Gaming Hero" 
-             class="w-full h-full object-cover object-center" 
+             class="w-full h-full object-cover object-center xs:object-top sm:object-center" 
              loading="eager" />
       </picture>
     </div>

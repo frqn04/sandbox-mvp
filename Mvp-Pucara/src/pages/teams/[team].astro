@@ -10,6 +10,9 @@ export async function getStaticPaths() {
   return getTeamStaticPaths();
 }
 
+// Prerenderizar esta página como HTML estático
+export const prerender = true;
+
 // Obtener el equipo actual desde los datos centralizados
 const currentTeam = getTeamById(team as string);
 

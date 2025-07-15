@@ -10,6 +10,12 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        'xs': '475px',   // Celulares pequeños
+        'sm': '640px',   // Celulares medianos (default)
+        'md': '768px',   // Tablets (default)
+        'lg': '1024px',  // Laptop pequeña (default)
+        'xl': '1280px',  // Desktop (default)
+        '2xl': '1536px', // Desktop grande (default)
         '3xl': '1920px', // TV 1080p y monitores gaming grandes
       },
       fontFamily: {
