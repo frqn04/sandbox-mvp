@@ -9,5 +9,12 @@
       "source": "/api/contact",
       "destination": "/api/contact.js"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/home",
+      "permanent": false
+    }
   ]
 }
