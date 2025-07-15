@@ -107,33 +107,37 @@ export default async function handler(req, res) {
       </div>
     `;
 
-    // Enviar email usando el servicio de email de Vercel o integración externa
-    // Por ahora, vamos a usar un servicio simple como EmailJS o similar
-    
-    // Opción 1: Usar servicio de email externo (recomendado para producción)
-    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-      // Configurar nodemailer si tienes credenciales SMTP
-      const nodemailer = require('nodemailer');
-      
-      const transporter = nodemailer.createTransporter({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT || 587,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        }
-      });
+    // Enviar email usando Resend (recomendado para producción)
+    if (process.env.RESEND_API_KEY) {
+      try {
+        const resendResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'Pucará Gaming <contacto@pucaragaming.com>',
+            to: ['francisgcastellano1@gmail.com'],
+            reply_to: email,
+            subject: `[PUCARA GAMING] ${motivoTexto} - ${nombre} ${apellido}`,
+            html: emailContent
+          })
+        });
 
-      await transporter.sendMail({
-        from: `"${nombre} ${apellido}" <${process.env.SMTP_USER}>`,
-        to: 'francisgcastellano1@gmail.com',
-        replyTo: email,
-        subject: `[PUCARA GAMING] ${motivoTexto} - ${nombre} ${apellido}`,
-        html: emailContent
-      });
+        const resendResult = await resendResponse.json();
+        
+        if (!resendResponse.ok) {
+          throw new Error(`Resend error: ${resendResult.message || 'Unknown error'}`);
+        }
+        
+        console.log('Email enviado exitosamente via Resend:', resendResult.id);
+      } catch (resendError) {
+        console.error('Error enviando email via Resend:', resendError);
+        throw new Error('Error enviando email');
+      }
     } else {
-      // Opción 2: Log para desarrollo (cambiar por servicio real)
+      // Fallback: Log para desarrollo
       console.log('=== NUEVO CONTACTO RECIBIDO ===');
       console.log('Timestamp:', timestamp);
       console.log('Nombre:', nombre, apellido);
@@ -142,6 +146,7 @@ export default async function handler(req, res) {
       console.log('Mensaje:', mensaje);
       console.log('IP:', req.headers['x-forwarded-for'] || req.connection.remoteAddress);
       console.log('===============================');
+      console.log('NOTA: Configurar RESEND_API_KEY para envío de emails');
     }
 
     // Respuesta exitosa
