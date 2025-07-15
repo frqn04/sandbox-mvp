@@ -1,9 +1,19 @@
 // API Endpoint para Astro - Manejo del formulario de contacto
 export const prerender = false;
 
-export async function POST({ request }) {
+export async function POST(context) {
   console.log('=== API CONTACT CALLED ===');
-  console.log('Request received');
+  console.log('Context received:', !!context);
+  
+  const { request } = context;
+  
+  if (!request) {
+    console.error('Request is undefined');
+    return new Response(JSON.stringify({ error: 'Request no disponible' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
   
   try {
     // Extraer datos del formulario - Priorizar JSON que es lo que envía el frontend
