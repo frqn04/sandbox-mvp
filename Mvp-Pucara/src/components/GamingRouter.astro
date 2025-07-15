@@ -185,7 +185,7 @@
   // 3. NAVEGACIÓN CON TECLADO GAMING
   function setupKeyboardNavigation() {
     const shortcuts = {
-      'KeyH': '/home',
+      'KeyH': '/',
       'KeyT': '/teams',
       'KeyN': '/news',
       'KeyC': '/contact',
@@ -295,7 +295,7 @@
     clearTimeout(window.gamingPageTimeout);
     
     switch(currentPath) {
-      case '/home':
+      case '/':
         window.gamingPageTimeout = setTimeout(function() {
           // Reinicializar carousel si existe
           const carousel = document.querySelector('.instagram-carousel');
