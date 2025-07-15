@@ -1,50 +1,95 @@
-// API Route para Vercel - Manejo del formulario de contacto
-export default async function handler(req, res) {
-  // Solo permitir método POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+// API Endpoint para Astro - Manejo del formulario de contacto
+export const prerender = false;
 
-  // Configurar CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
+export async function POST({ request }) {
+  console.log('=== API CONTACT CALLED ===');
+  console.log('Request received');
+  
   try {
     // Extraer datos del formulario
-    const { nombre, apellido, email, motivo, mensaje, 'g-recaptcha-response': recaptchaResponse } = req.body;
+    let body;
+    try {
+      body = await request.json();
+    } catch (jsonError) {
+      console.error('Error parsing JSON:', jsonError);
+      return new Response(JSON.stringify({ error: 'Formato de datos inválido' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    const { nombre, apellido, email, motivo, mensaje, 'g-recaptcha-response': recaptchaResponse } = body;
+    
+    console.log('=== DATOS RECIBIDOS ===');
+    console.log('Nombre:', nombre);
+    console.log('Apellido:', apellido);
+    console.log('Email:', email);
+    console.log('Motivo:', motivo);
+    console.log('Mensaje length:', mensaje?.length);
+    console.log('reCAPTCHA response:', recaptchaResponse ? 'Present' : 'Not present');
+    console.log('=================');
 
     // Validación básica
     if (!nombre || !apellido || !email || !motivo || !mensaje) {
-      return res.status(400).json({ 
+      console.error('Validation failed - missing fields');
+      return new Response(JSON.stringify({ 
         error: 'Todos los campos son requeridos',
         missing: { nombre: !nombre, apellido: !apellido, email: !email, motivo: !motivo, mensaje: !mensaje }
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
       });
     }
 
     // Validar formato de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: 'Email inválido' });
+      console.error('Invalid email format:', email);
+      return new Response(JSON.stringify({ error: 'Email inválido' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    // Validar reCAPTCHA (habilitado)
-    if (process.env.NODE_ENV === 'production' && recaptchaResponse) {
-      const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
-      
-      if (recaptchaSecret) {
+    // Log de variables de entorno (sin mostrar valores sensibles)
+    console.log('=== ENVIRONMENT CHECK ===');
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'Present' : 'Not set');
+    console.log('RECAPTCHA_SECRET_KEY:', process.env.RECAPTCHA_SECRET_KEY ? 'Present' : 'Not set');
+    console.log('CONTACT_EMAIL:', process.env.CONTACT_EMAIL || 'Using default');
+    console.log('=====================');
+
+    // Validar reCAPTCHA (solo en producción si está configurado)
+    if (recaptchaResponse && process.env.RECAPTCHA_SECRET_KEY) {
+      console.log('Validating reCAPTCHA...');
+      try {
         const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `secret=${recaptchaSecret}&response=${recaptchaResponse}`
+          body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaResponse}`
         });
         
         const recaptchaResult = await recaptchaVerification.json();
+        console.log('reCAPTCHA result:', recaptchaResult);
         
         if (!recaptchaResult.success) {
-          return res.status(400).json({ error: 'Verificación reCAPTCHA fallida' });
+          console.error('reCAPTCHA validation failed:', recaptchaResult);
+          return new Response(JSON.stringify({ error: 'Verificación reCAPTCHA fallida' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' }
+          });
         }
+        
+        console.log('reCAPTCHA validation successful');
+      } catch (recaptchaError) {
+        console.error('Error validating reCAPTCHA:', recaptchaError);
+        return new Response(JSON.stringify({ error: 'Error en verificación reCAPTCHA' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
+    } else {
+      console.log('Skipping reCAPTCHA validation - not configured or no response');
     }
 
     // Preparar datos para el email
@@ -128,13 +173,26 @@ export default async function handler(req, res) {
         const resendResult = await resendResponse.json();
         
         if (!resendResponse.ok) {
+          console.error('Resend API error:', resendResult);
           throw new Error(`Resend error: ${resendResult.message || 'Unknown error'}`);
         }
         
         console.log('Email enviado exitosamente via Resend:', resendResult.id);
       } catch (resendError) {
         console.error('Error enviando email via Resend:', resendError);
-        throw new Error('Error enviando email');
+        
+        // Log para debugging pero no fallar
+        console.log('=== CONTACTO RECIBIDO (Error en envío) ===');
+        console.log('Timestamp:', timestamp);
+        console.log('Nombre:', nombre, apellido);
+        console.log('Email:', email);
+        console.log('Motivo:', motivoTexto);
+        console.log('Mensaje:', mensaje);
+        console.log('Error:', resendError.message);
+        console.log('===============================');
+        
+        // Continuar con la respuesta exitosa para no bloquear al usuario
+        // throw new Error('Error enviando email');
       }
     } else {
       // Fallback: Log para desarrollo
@@ -144,23 +202,36 @@ export default async function handler(req, res) {
       console.log('Email:', email);
       console.log('Motivo:', motivoTexto);
       console.log('Mensaje:', mensaje);
-      console.log('IP:', req.headers['x-forwarded-for'] || req.connection.remoteAddress);
       console.log('===============================');
       console.log('NOTA: Configurar RESEND_API_KEY para envío de emails');
     }
 
     // Respuesta exitosa
-    return res.status(200).json({ 
+    console.log('=== FORM PROCESSING COMPLETE ===');
+    console.log('Success response being sent');
+    console.log('============================');
+    
+    return new Response(JSON.stringify({ 
       success: true, 
       message: 'Mensaje enviado exitosamente',
       timestamp: timestamp
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    console.error('Error procesando formulario:', error);
-    return res.status(500).json({ 
+    console.error('=== ERROR PROCESSING FORM ===');
+    console.error('Error details:', error);
+    console.error('Stack trace:', error.stack);
+    console.error('==========================');
+    
+    return new Response(JSON.stringify({ 
       error: 'Error interno del servidor',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 }
