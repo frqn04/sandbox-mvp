@@ -1,4 +1,107 @@
 ---
-// Redirect automático de "/" a "/home"
-return Astro.redirect("/home");
+// Redirect automático de "/" a "/home" con pantalla de carga gaming
+import Layout from '../layouts/Layout.astro';
 ---
+
+<Layout title="Pucará Gaming - Cargando...">
+  <div id="gaming-initial-loader" class="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black z-50 flex flex-col items-center justify-center">
+    
+    <!-- Logo de Pucará con animación -->
+    <div class="mb-8 animate-pulse">
+      <img src="/logopucara.png" alt="Pucará Gaming" class="w-32 h-32 filter drop-shadow-lg drop-shadow-orange-500/50" />
+    </div>
+    
+    <!-- Texto principal -->
+    <h1 class="text-4xl font-bold text-white mb-4 text-center animate-fade-in">
+      <span class="text-primary">PUCARÁ</span> GAMING
+    </h1>
+    
+    <!-- Texto de carga -->
+    <p class="text-white/80 text-lg mb-8 animate-bounce-slow">
+      Iniciando experiencia gaming...
+    </p>
+    
+    <!-- Barra de progreso -->
+    <div class="w-80 h-2 bg-gray-800 rounded-full overflow-hidden mb-6">
+      <div id="initial-progress" class="h-full bg-gradient-to-r from-primary to-orange-400 rounded-full animate-loading-bar"></div>
+    </div>
+    
+    <!-- Efectos de partículas -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-ping"></div>
+      <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-orange-400 rounded-full animate-ping delay-500"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-primary rounded-full animate-ping delay-1000"></div>
+    </div>
+    
+    <!-- Mensaje de redirección -->
+    <div class="text-center mt-8">
+      <p class="text-white/60 text-sm animate-fade-in-delay">
+        Redirigiendo a inicio...
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes loading-bar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  
+  @keyframes fade-in-delay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+  
+  .animate-loading-bar {
+    animation: loading-bar 2s ease-out;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fade-in-delay 1s ease-out 1.5s both;
+  }
+</style>
+
+<script is:inline>
+// Redirect automático con pantalla de carga gaming
+(function() {
+  let progress = 0;
+  const progressBar = document.getElementById('initial-progress');
+  
+  // Animar barra de progreso
+  const interval = setInterval(() => {
+    progress += 4; // Incremento más rápido para 2.5s total
+    
+    if (progressBar) {
+      progressBar.style.width = progress + '%';
+    }
+    
+    if (progress >= 100) {
+      clearInterval(interval);
+      
+      // Redirect después de completar la carga
+      setTimeout(() => {
+        window.location.href = '/home';
+      }, 500);
+    }
+  }, 100); // Actualizar cada 100ms
+})();
+</script>
