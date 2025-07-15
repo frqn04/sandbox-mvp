@@ -70,7 +70,7 @@ export default async function handler(req, res) {
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a1a; color: #ffffff; padding: 20px; border-radius: 10px;">
         <div style="text-align: center; margin-bottom: 30px;">
-          <img src="https://tu-dominio.vercel.app/logopucara.png" alt="Pucará Gaming" style="width: 80px; height: 80px;" />
+          <img src="https://mvp-pucara-grbrbc6la-frqns-projects.vercel.app/logopucara.png" alt="Pucará Gaming" style="width: 80px; height: 80px;" />
           <h1 style="color: #ff6b1a; margin: 10px 0 0 0;">Nuevo contacto desde la web</h1>
         </div>
         
