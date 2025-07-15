@@ -63,13 +63,27 @@
 </style>
 
 <script>
-// Animación de la barra de progreso y redirect - Simplificado
+// Animación de la barra de progreso y redirect - Con detección de primera visita
 (function() {
+  // Verificar si es la primera visita a la sesión
+  const isFirstVisit = !sessionStorage.getItem('visited');
+  
+  if (isFirstVisit) {
+    // Primera visita: marcar como visitado y redireccionar inmediatamente
+    sessionStorage.setItem('visited', 'true');
+    window.location.href = '/home';
+    return;
+  }
+  
+  // Si no es primera visita, mostrar pantalla de carga
   let progress = 0;
   const progressBar = document.getElementById('gaming-progress-bar');
   const loadingStatus = document.getElementById('loading-status');
   
   if (!progressBar || !loadingStatus) return;
+  
+  // Obtener URL de destino o usar /home por defecto
+  const targetUrl = sessionStorage.getItem('targetUrl') || '/home';
   
   const interval = setInterval(() => {
     progress += 2.5; // Para completar en 4 segundos
@@ -89,9 +103,12 @@
       clearInterval(interval);
       loadingStatus.textContent = 'REDIRIGIENDO...';
       
+      // Limpiar la URL de destino
+      sessionStorage.removeItem('targetUrl');
+      
       // Redirect después de completar la carga
       setTimeout(() => {
-        window.location.href = '/home';
+        window.location.href = targetUrl;
       }, 500);
     }
   }, 100); // Actualizar cada 100ms

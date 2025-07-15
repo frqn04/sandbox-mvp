@@ -198,12 +198,22 @@
         e.preventDefault();
         showGamingNavigationNotification();
         
-        // Usar ClientRouter navigate si está disponible
-        if (window.astroTransitions && window.astroTransitions.navigate) {
-          window.astroTransitions.navigate(shortcuts[e.code]);
-        } else {
-          window.location.href = shortcuts[e.code];
+        // Función para navegar con pantalla de carga
+        function navigateWithLoader(targetUrl) {
+          // Solo mostrar pantalla de carga si no es la primera visita
+          if (sessionStorage.getItem('visited')) {
+            // Guardar la URL de destino
+            sessionStorage.setItem('targetUrl', targetUrl);
+            // Ir a la pantalla de carga
+            window.location.href = '/';
+          } else {
+            // Primera visita: navegación directa
+            window.location.href = targetUrl;
+          }
         }
+        
+        // Usar navegación con pantalla de carga
+        navigateWithLoader(shortcuts[e.code]);
       }
       
       // Mostrar atajos con Alt + M (Map)
