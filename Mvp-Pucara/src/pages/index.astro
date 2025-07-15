@@ -63,38 +63,26 @@
 </style>
 
 <script>
-// Animación de la barra de progreso y redirect
+// Animación de la barra de progreso y redirect - Simplificado
 (function() {
   let progress = 0;
   const progressBar = document.getElementById('gaming-progress-bar');
   const loadingStatus = document.getElementById('loading-status');
   
-  const messages = [
-    'INICIANDO EXPERIENCIA GAMING...',
-    'CARGANDO COMPONENTES...',
-    'PREPARANDO INTERFAZ...',
-    'FINALIZANDO CARGA...'
-  ];
-  
-  let messageIndex = 0;
+  if (!progressBar || !loadingStatus) return;
   
   const interval = setInterval(() => {
     progress += 2.5; // Para completar en 4 segundos
     
-    if (progressBar) {
-      progressBar.style.width = Math.min(progress, 100) + '%';
-    }
+    progressBar.style.width = Math.min(progress, 100) + '%';
     
-    // Cambiar mensaje cada 25%
-    if (progress >= 25 && messageIndex === 0) {
-      messageIndex = 1;
-      loadingStatus.textContent = messages[1];
-    } else if (progress >= 50 && messageIndex === 1) {
-      messageIndex = 2;
-      loadingStatus.textContent = messages[2];
-    } else if (progress >= 75 && messageIndex === 2) {
-      messageIndex = 3;
-      loadingStatus.textContent = messages[3];
+    // Cambiar mensaje según progreso
+    if (progress >= 75) {
+      loadingStatus.textContent = 'FINALIZANDO CARGA...';
+    } else if (progress >= 50) {
+      loadingStatus.textContent = 'PREPARANDO INTERFAZ...';
+    } else if (progress >= 25) {
+      loadingStatus.textContent = 'CARGANDO COMPONENTES...';
     }
     
     if (progress >= 100) {
