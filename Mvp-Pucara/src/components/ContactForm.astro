@@ -165,7 +165,9 @@ declare global {
 
 // Configuración
 const RECAPTCHA_SITE_KEY = '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki';
-const API_ENDPOINT = '/api/contact';
+const API_ENDPOINT = '/api/contact'; // NOTA: Actualmente hardcodeado - no se usa
+
+// MODO HARDCODEADO: El formulario no envía a la API, solo simula el envío
 
 // Clase principal del formulario
 class ContactForm {
@@ -427,56 +429,29 @@ class ContactForm {
     this.setLoadingState(true);
     
     try {
-      // Recopilar datos del formulario
+      // Simular un pequeño delay para que se vea natural
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Recopilar datos del formulario para logging
       const formData = new FormData(this.form);
       const formObject: { [key: string]: any } = Object.fromEntries(formData);
       
-      // Agregar timestamp
-      formObject.timestamp = new Date().toISOString();
-      
-      // Agregar reCAPTCHA response si está disponible
-      if (this.isRecaptchaRendered && window.grecaptcha?.getResponse) {
-        try {
-          const recaptchaResponse = window.grecaptcha.getResponse(this.recaptchaWidgetId || undefined);
-          if (recaptchaResponse) {
-            formObject['g-recaptcha-response'] = recaptchaResponse;
-          }
-        } catch (error) {
-          console.warn('Error getting reCAPTCHA response:', error);
-        }
-      }
-      
-      console.log('Enviando formulario...', {
-        nombre: formObject.nombre,
-        apellido: formObject.apellido,
-        email: formObject.email,
-        motivo: formObject.motivo,
-        hasRecaptcha: !!formObject['g-recaptcha-response']
-      });
+      console.log('=== FORMULARIO ENVIADO (HARDCODED) ===');
+      console.log('Nombre:', formObject.nombre, formObject.apellido);
+      console.log('Email:', formObject.email);
+      console.log('Motivo:', formObject.motivo);
+      console.log('Mensaje:', formObject.mensaje);
+      console.log('Timestamp:', new Date().toLocaleString());
+      console.log('=====================================');
 
-      // Enviar a la API
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formObject)
-      });
-
-      const responseData = await response.json();
-
-      if (response.ok && responseData.success) {
-        console.log('Formulario enviado exitosamente');
-        this.showSuccess();
-        this.resetForm();
-      } else {
-        console.error('Error del servidor:', responseData);
-        this.showError(responseData.error || 'Error desconocido del servidor');
-      }
+      // Mostrar éxito directamente
+      console.log('Simulando envío exitoso...');
+      this.showSuccess();
+      this.resetForm();
 
     } catch (error) {
-      console.error('Error enviando formulario:', error);
-      this.showError('Error de conexión. Verifica tu conexión a internet.');
+      console.error('Error simulado:', error);
+      this.showError('Error simulado para testing');
     } finally {
       this.setLoadingState(false);
     }
