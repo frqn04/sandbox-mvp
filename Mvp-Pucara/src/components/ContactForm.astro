@@ -405,9 +405,27 @@ class ContactForm {
 
 // Inicializar cuando el DOM esté listo
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new ContactForm());
+  document.addEventListener('DOMContentLoaded', initializeForm);
 } else {
-  new ContactForm();
+  initializeForm();
+}
+
+function initializeForm() {
+  // Esperar a que reCAPTCHA esté disponible
+  if (typeof window.grecaptcha !== 'undefined') {
+    new ContactForm();
+  } else {
+    // Esperar un poco más y reintentar
+    setTimeout(() => {
+      if (typeof window.grecaptcha !== 'undefined') {
+        new ContactForm();
+      } else {
+        // Si aún no está disponible, inicializar sin reCAPTCHA
+        console.warn('reCAPTCHA no disponible, iniciando sin él');
+        new ContactForm();
+      }
+    }, 1000);
+  }
 }
 </script>
 

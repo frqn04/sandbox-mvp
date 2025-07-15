@@ -4,30 +4,37 @@ export const prerender = false;
 export async function POST({ request }) {
   console.log('=== API CONTACT CALLED ===');
   console.log('Request received');
+  console.log('Content-Type:', request.headers.get('content-type'));
   
   try {
-    // Extraer datos del formulario - Manejar tanto FormData como JSON
+    // Extraer datos del formulario - Método más simple y robusto
     let body;
-    const contentType = request.headers.get('content-type');
     
     try {
-      if (contentType && contentType.includes('application/json')) {
-        body = await request.json();
-      } else if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
-        const formData = await request.formData();
-        body = Object.fromEntries(formData);
+      // Clonar el request para poder intentar múltiples métodos
+      const clonedRequest = request.clone();
+      
+      // Intentar text() primero para ver qué estamos recibiendo
+      const textData = await clonedRequest.text();
+      console.log('Raw request data:', textData);
+      
+      // Si es URL encoded
+      if (textData.includes('=') && textData.includes('&')) {
+        const params = new URLSearchParams(textData);
+        body = Object.fromEntries(params.entries());
+        console.log('Parsed as URL encoded');
       } else {
-        // Intentar FormData primero, luego JSON
-        try {
-          const formData = await request.formData();
-          body = Object.fromEntries(formData);
-        } catch {
-          body = await request.json();
-        }
+        // Intentar JSON
+        body = JSON.parse(textData);
+        console.log('Parsed as JSON');
       }
+      
     } catch (parseError) {
-      console.error('Error parsing request:', parseError);
-      return new Response(JSON.stringify({ error: 'Formato de datos inválido' }), {
+      console.error('All parsing methods failed:', parseError);
+      return new Response(JSON.stringify({ 
+        error: 'Formato de datos inválido',
+        details: parseError.message
+      }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -36,6 +43,8 @@ export async function POST({ request }) {
     const { nombre, apellido, email, motivo, mensaje, 'g-recaptcha-response': recaptchaResponse } = body;
     
     console.log('=== DATOS RECIBIDOS ===');
+    console.log('Body keys:', Object.keys(body));
+    console.log('Body values:', body);
     console.log('Nombre:', nombre);
     console.log('Apellido:', apellido);
     console.log('Email:', email);
