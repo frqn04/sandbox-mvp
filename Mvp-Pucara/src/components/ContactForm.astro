@@ -81,7 +81,7 @@ const { className = "" } = Astro.props;
     <div class="form-group flex justify-center" role="group" aria-labelledby="captcha-label">
       <div class="flex flex-col items-center">
         <span id="captcha-label" class="sr-only">Verificación de seguridad reCAPTCHA</span>
-        <div class="g-recaptcha" data-sitekey="6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki" aria-label="Verificación reCAPTCHA"></div>
+        <div id="recaptcha-container" class="g-recaptcha" data-sitekey="6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki" aria-label="Verificación reCAPTCHA"></div>
         <span id="captcha-error" class="text-red-500 text-sm mt-1 hidden" role="alert">Por favor completa la verificación reCAPTCHA.</span>
       </div>
     </div>
@@ -427,6 +427,22 @@ function initializeForm() {
     }, 1000);
   }
 }
+
+// Callback global para cuando reCAPTCHA esté listo
+window.onRecaptchaLoad = function() {
+  console.log('reCAPTCHA loaded successfully');
+  // Renderizar explícitamente el reCAPTCHA
+  const recaptchaContainer = document.getElementById('recaptcha-container');
+  if (recaptchaContainer) {
+    grecaptcha.render(recaptchaContainer, {
+      'sitekey': '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki'
+    });
+  }
+  // Inicializar el formulario después de que reCAPTCHA esté listo
+  if (typeof ContactForm !== 'undefined') {
+    new ContactForm();
+  }
+};
 </script>
 
 <style>
