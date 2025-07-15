@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email inválido' });
     }
 
-    // Validar reCAPTCHA (solo en producción)
+    // Validar reCAPTCHA (habilitado)
     if (process.env.NODE_ENV === 'production' && recaptchaResponse) {
       const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
       
