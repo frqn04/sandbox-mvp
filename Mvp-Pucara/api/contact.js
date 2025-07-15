@@ -118,7 +118,7 @@ export default async function handler(req, res) {
           },
           body: JSON.stringify({
             from: 'Pucará Gaming <contacto@pucaragaming.com>',
-            to: ['francisgcastellano1@gmail.com'],
+            to: [process.env.CONTACT_EMAIL || 'francisgcastellano1@gmail.com'],
             reply_to: email,
             subject: `[PUCARA GAMING] ${motivoTexto} - ${nombre} ${apellido}`,
             html: emailContent
