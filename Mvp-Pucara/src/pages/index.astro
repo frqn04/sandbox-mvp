@@ -1,216 +1,106 @@
 ---
 // Redirect automático de "/" a "/home" con pantalla de carga gaming
+import Layout from '../layouts/Layout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pucará Gaming - Cargando...</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<Layout title="Pucará Gaming - Cargando...">
+  <div id="gaming-initial-loader" class="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black z-50 flex flex-col items-center justify-center">
     
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #000000, #1a1a1a, #000000);
-      overflow: hidden;
-      height: 100vh;
-    }
-    
-    .loader-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    
-    .logo {
-      width: 128px;
-      height: 128px;
-      margin-bottom: 32px;
-      animation: pulse 2s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px rgba(234, 96, 26, 0.5));
-    }
-    
-    .title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: white;
-      margin-bottom: 16px;
-      text-align: center;
-      animation: fadeIn 1s ease-out;
-    }
-    
-    .title-accent {
-      color: #ea601a;
-    }
-    
-    .loading-text {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1.125rem;
-      margin-bottom: 32px;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    
-    .progress-container {
-      width: 320px;
-      height: 8px;
-      background: #374151;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-    
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, #ea601a, #fb923c);
-      border-radius: 4px;
-      width: 0%;
-      transition: width 0.3s ease-out;
-    }
-    
-    .redirect-text {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.875rem;
-      text-align: center;
-      animation: fadeInDelay 1s ease-out 1.5s both;
-    }
-    
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #ea601a;
-      border-radius: 50%;
-      animation: ping 2s ease-in-out infinite;
-    }
-    
-    .particle:nth-child(1) {
-      top: 25%;
-      left: 25%;
-      animation-delay: 0s;
-    }
-    
-    .particle:nth-child(2) {
-      top: 33%;
-      right: 33%;
-      width: 2px;
-      height: 2px;
-      background: #fb923c;
-      animation-delay: 0.5s;
-    }
-    
-    .particle:nth-child(3) {
-      bottom: 25%;
-      left: 33%;
-      width: 3px;
-      height: 3px;
-      animation-delay: 1s;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    @keyframes fadeInDelay {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes ping {
-      0% { transform: scale(1); opacity: 1; }
-      75%, 100% { transform: scale(2); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <div class="loader-container">
     <!-- Logo de Pucará con animación -->
-    <img src="/logopucara.png" alt="Pucará Gaming" class="logo" />
+    <div class="mb-8">
+      <img src="/logopucara.png" alt="Pucará Gaming" class="w-32 h-32 animate-pulse filter drop-shadow-lg" style="filter: drop-shadow(0 0 20px rgba(234, 96, 26, 0.5));" />
+    </div>
     
     <!-- Texto principal -->
-    <h1 class="title">
-      <span class="title-accent">PUCARÁ</span> GAMING
+    <h1 class="text-4xl font-bold text-white mb-4 text-center animate-fade-in">
+      <span class="text-primary">PUCARÁ</span> GAMING
     </h1>
     
     <!-- Texto de carga -->
-    <p class="loading-text">
+    <p class="text-white/80 text-lg mb-8 animate-bounce-slow">
       Iniciando experiencia gaming...
     </p>
     
     <!-- Barra de progreso -->
-    <div class="progress-container">
-      <div id="progressBar" class="progress-bar"></div>
-    </div>
-    
-    <!-- Mensaje de redirección -->
-    <div class="redirect-text">
-      Redirigiendo a inicio...
+    <div class="w-80 h-2 bg-gray-800 rounded-full overflow-hidden mb-6">
+      <div id="initial-progress" class="h-full bg-gradient-to-r from-primary to-orange-400 rounded-full transition-all duration-300"></div>
     </div>
     
     <!-- Efectos de partículas -->
-    <div class="particles">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-ping"></div>
+      <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-orange-400 rounded-full animate-ping delay-500"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-primary rounded-full animate-ping delay-1000"></div>
+    </div>
+    
+    <!-- Mensaje de redirección -->
+    <div class="text-center mt-8">
+      <p class="text-white/60 text-sm animate-fade-in-delay">
+        Redirigiendo a inicio...
+      </p>
     </div>
   </div>
+</Layout>
 
-  <script>
-    // Redirect automático con pantalla de carga gaming
-    (function() {
-      let progress = 0;
-      const progressBar = document.getElementById('progressBar');
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes fade-in-delay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fade-in-delay 1s ease-out 1.5s both;
+  }
+  
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  .delay-1000 {
+    animation-delay: 1s;
+  }
+</style>
+
+<script>
+// Redirect automático con pantalla de carga gaming
+(function() {
+  let progress = 0;
+  const progressBar = document.getElementById('initial-progress');
+  
+  // Animar barra de progreso
+  const interval = setInterval(() => {
+    progress += 3.33; // Para completar en 3 segundos (100 / 30 = 3.33)
+    
+    if (progressBar) {
+      progressBar.style.width = Math.min(progress, 100) + '%';
+    }
+    
+    if (progress >= 100) {
+      clearInterval(interval);
       
-      // Animar barra de progreso
-      const interval = setInterval(() => {
-        progress += 3.33; // Para completar en 3 segundos (100 / 30 = 3.33)
-        
-        if (progressBar) {
-          progressBar.style.width = Math.min(progress, 100) + '%';
-        }
-        
-        if (progress >= 100) {
-          clearInterval(interval);
-          
-          // Redirect después de completar la carga
-          setTimeout(() => {
-            window.location.href = '/home';
-          }, 500);
-        }
-      }, 100); // Actualizar cada 100ms
-    })();
-  </script>
-</body>
-</html>
+      // Redirect después de completar la carga
+      setTimeout(() => {
+        window.location.href = '/home';
+      }, 500);
+    }
+  }, 100); // Actualizar cada 100ms
+})();
+</script>
