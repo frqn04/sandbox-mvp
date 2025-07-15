@@ -166,7 +166,7 @@ const createResponse = (data: APIResponse, status: number = 200): Response => {
 };
 
 // Handler principal del endpoint
-export const POST: APIRoute = async (context) => {
+const POST: APIRoute = async (context) => {
   console.log('=== API CONTACT CALLED ===');
   console.log('Context received:', !!context);
   
@@ -351,3 +351,5 @@ export const POST: APIRoute = async (context) => {
     }, 500);
   }
 };
+
+export { POST };
