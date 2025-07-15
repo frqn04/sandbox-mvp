@@ -159,7 +159,6 @@ declare global {
       getResponse: () => string;
       reset: () => void;
     };
-    onRecaptchaLoad: () => void;
   }
 }
 
@@ -433,53 +432,96 @@ class ContactForm {
 }
 
 /**
+ * Carga el script de reCAPTCHA de Google de forma asíncrona.
+ * Devuelve una promesa que se resuelve cuando el script está cargado.
+ */
+function loadRecaptchaScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    // Si el script ya está cargado, resolver inmediatamente
+    if (document.querySelector('script[src^="https://www.google.com/recaptcha/api.js"]')) {
+      console.log('reCAPTCHA script already present.');
+      return resolve();
+    }
+
+    console.log('Loading reCAPTCHA script...');
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    
+    script.onload = () => {
+      console.log('reCAPTCHA API script loaded successfully.');
+      resolve();
+    };
+    
+    script.onerror = (error) => {
+      console.error('Failed to load reCAPTCHA script:', error);
+      reject(new Error('reCAPTCHA script failed to load. It might be blocked by an ad blocker.'));
+    };
+    
+    document.head.appendChild(script);
+  });
+}
+
+/**
  * Renderiza el reCAPTCHA en el contenedor designado.
  * Se asegura de no renderizarlo múltiples veces en el mismo contenedor.
  */
 function renderRecaptcha() {
   const container = document.getElementById('recaptcha-container');
-  // Verificar si el contenedor existe y no ha sido ya renderizado
-  if (container && container.innerHTML.trim() === '') {
+  // Verificar si el contenedor existe, si la API está lista y si no ha sido ya renderizado
+  if (container && typeof window.grecaptcha?.render === 'function' && container.innerHTML.trim() === '') {
     console.log('Rendering reCAPTCHA...');
-    window.grecaptcha.render(container, {
-      'sitekey': '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki',
-      'theme': 'dark' // Tema oscuro para que coincida con el diseño
-    });
+    try {
+      window.grecaptcha.render(container, {
+        'sitekey': '6LcHqX0rAAAAAMNAdLanpx8pCnncgufHa8HYFvki',
+        'theme': 'dark' // Tema oscuro para que coincida con el diseño
+      });
+    } catch (renderError) {
+      console.error('Error rendering reCAPTCHA widget:', renderError);
+    }
   }
 }
-
-/**
- * Callback global que se ejecuta cuando el script de reCAPTCHA de Google se ha cargado.
- */
-window.onRecaptchaLoad = function() {
-  console.log('reCAPTCHA API script loaded.');
-  renderRecaptcha();
-};
 
 /**
  * Función principal de inicialización.
  * Se ejecuta en cada carga de página gracias a las transiciones de Astro.
  */
-function initialize() {
+async function initialize() {
   // Inicializar el formulario principal
   const form = document.getElementById('contactForm');
   if (form && !form.hasAttribute('data-initialized')) {
     new ContactForm();
     form.setAttribute('data-initialized', 'true');
+    console.log('ContactForm initialized.');
   }
 
-  // Si la API de grecaptcha ya está cargada, renderizar el widget.
-  // Esto es útil para navegaciones posteriores donde el script ya está en memoria.
-  if (typeof window.grecaptcha !== 'undefined' && typeof window.grecaptcha.render === 'function') {
-    renderRecaptcha();
+  // Cargar y renderizar reCAPTCHA de forma segura
+  try {
+    // Esperar a que el script se cargue
+    await loadRecaptchaScript();
+    // Una vez cargado, esperar a que la API esté lista y renderizar
+    const interval = setInterval(() => {
+      if (typeof window.grecaptcha?.render === 'function') {
+        clearInterval(interval);
+        renderRecaptcha();
+      }
+    }, 100);
+  } catch (error) {
+    console.warn((error as Error).message);
+    // No hacer nada más, el formulario seguirá funcionando sin reCAPTCHA
   }
 }
 
 // Usar el evento 'astro:page-load' que es compatible con ViewTransitions
 document.addEventListener('astro:page-load', initialize);
 
-// Llamada inicial por si el evento ya pasó
-initialize();
+// Llamada inicial por si el evento ya pasó (para cargas de página sin transición)
+if (document.readyState === 'complete') {
+  initialize();
+} else {
+  document.addEventListener('DOMContentLoaded', initialize, { once: true });
+}
 </script>
 
 <style>
