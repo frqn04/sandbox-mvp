@@ -6,12 +6,27 @@ export async function POST({ request }) {
   console.log('Request received');
   
   try {
-    // Extraer datos del formulario
+    // Extraer datos del formulario - Manejar tanto FormData como JSON
     let body;
+    const contentType = request.headers.get('content-type');
+    
     try {
-      body = await request.json();
-    } catch (jsonError) {
-      console.error('Error parsing JSON:', jsonError);
+      if (contentType && contentType.includes('application/json')) {
+        body = await request.json();
+      } else if (contentType && contentType.includes('application/x-www-form-urlencoded')) {
+        const formData = await request.formData();
+        body = Object.fromEntries(formData);
+      } else {
+        // Intentar FormData primero, luego JSON
+        try {
+          const formData = await request.formData();
+          body = Object.fromEntries(formData);
+        } catch {
+          body = await request.json();
+        }
+      }
+    } catch (parseError) {
+      console.error('Error parsing request:', parseError);
       return new Response(JSON.stringify({ error: 'Formato de datos inválido' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
