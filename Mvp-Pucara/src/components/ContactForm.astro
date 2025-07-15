@@ -299,16 +299,24 @@ class ContactForm {
       }
     });
 
-    // Validar reCAPTCHA
+    // Validar reCAPTCHA (opcional - no bloquear si falla)
     if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.getResponse) {
-      const recaptchaResponse = window.grecaptcha.getResponse();
-      const captchaError = document.getElementById('captcha-error');
-      if (!recaptchaResponse) {
-        if (captchaError) captchaError.classList.remove('hidden');
-        isValid = false;
-      } else {
-        if (captchaError) captchaError.classList.add('hidden');
+      try {
+        const recaptchaResponse = window.grecaptcha.getResponse();
+        const captchaError = document.getElementById('captcha-error');
+        if (!recaptchaResponse) {
+          if (captchaError) captchaError.classList.remove('hidden');
+          // NO marcamos como inválido - permitir envío sin reCAPTCHA
+          console.warn('reCAPTCHA not completed, but allowing form submission');
+        } else {
+          if (captchaError) captchaError.classList.add('hidden');
+        }
+      } catch (recaptchaError) {
+        console.warn('Error validating reCAPTCHA:', recaptchaError);
+        // Continuar sin reCAPTCHA
       }
+    } else {
+      console.log('reCAPTCHA not available - continuing without it');
     }
 
     return isValid;
@@ -332,36 +340,38 @@ class ContactForm {
       // Agregar timestamp
       formObject.timestamp = new Date().toISOString();
       
-      let response: Response | { ok: boolean; status: number };
-      
-      // Si estamos en desarrollo, usar simulación
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        // Para desarrollo, simular envío exitoso
-        console.log('=== FORMULARIO DE CONTACTO (DESARROLLO) ===');
-        console.log('Datos enviados:', formObject);
-        console.log('Email destino: francisgcastellano1@gmail.com');
-        console.log('=======================================');
-        
-        // Simular delay de red
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        response = { ok: true, status: 200 };
-      } else {
-        // Para producción, enviar datos a la API de Vercel
-        response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formObject)
-        });
+      // Agregar reCAPTCHA response si está disponible
+      if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.getResponse) {
+        try {
+          const recaptchaResponse = window.grecaptcha.getResponse();
+          if (recaptchaResponse) {
+            formObject['g-recaptcha-response'] = recaptchaResponse;
+          }
+        } catch (recaptchaError) {
+          console.warn('Error getting reCAPTCHA response:', recaptchaError);
+        }
       }
+      
+      let response: Response;
+      
+      // Enviar datos a la API
+      response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formObject)
+      });
 
       if (response.ok) {
         this.showSuccessPopup();
         this.form.reset();
-        if (typeof window.grecaptcha !== 'undefined') {
-          window.grecaptcha.reset();
+        if (typeof window.grecaptcha !== 'undefined' && window.grecaptcha.reset) {
+          try {
+            window.grecaptcha.reset();
+          } catch (resetError) {
+            console.warn('Error resetting reCAPTCHA:', resetError);
+          }
         }
       } else {
         // Intentar obtener el error específico de la API
