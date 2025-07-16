@@ -199,15 +199,16 @@
         showGamingNavigationNotification();
         
         // Función para navegar con pantalla de carga
-        function navigateWithLoader(targetUrl) {
-          // Solo mostrar pantalla de carga si no es la primera visita
-          if (sessionStorage.getItem('visited')) {
+        function navigateWithLoader(targetUrl, useLoader = false) {
+          // Para atajos de teclado: navegación directa sin loader extra
+          // Esto evita doble pantalla de carga (loader + view transitions)
+          if (useLoader && sessionStorage.getItem('visited')) {
             // Guardar la URL de destino
             sessionStorage.setItem('targetUrl', targetUrl);
             // Ir a la pantalla de carga
             window.location.href = '/';
           } else {
-            // Primera visita: navegación directa
+            // Navegación directa con View Transitions (más fluida)
             window.location.href = targetUrl;
           }
         }

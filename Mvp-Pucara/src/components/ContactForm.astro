@@ -619,6 +619,24 @@ if (document.readyState === 'loading') {
     border: 0;
   }
 
+  /* Prevenir que el autofill cambie el color de fondo */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.3) inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  
+  /* Forzar el estilo correcto para todos los estados */
+  input[type="text"], 
+  input[type="email"], 
+  select, 
+  textarea {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+  }
+  
   /* Mejorar contraste de focus para accesibilidad */
   input:focus, select:focus, textarea:focus, button:focus {
     outline: 2px solid #ea601a;

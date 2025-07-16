@@ -13,10 +13,30 @@
 
 
 .navbar-global-spacer {
-  @apply h-[90px] md:h-[120px];
+  @apply h-[75px] mobile-s:h-[80px] mobile-m:h-[85px] mobile-l:h-[90px] md:h-[120px];
 }
 
-/* Optimización de animaciones y rendimiento */
+/* Responsive utilities para los nuevos breakpoints */
+@layer utilities {
+  /* Espaciado responsive */
+  .mobile-padding {
+    @apply px-3 mobile-s:px-4 mobile-m:px-5 mobile-l:px-6 sm:px-8;
+  }
+  
+  /* Texto responsive */
+  .text-responsive-sm {
+    @apply text-xs mobile-s:text-sm mobile-m:text-base mobile-l:text-lg sm:text-xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg mobile-s:text-xl mobile-m:text-2xl mobile-l:text-3xl sm:text-4xl;
+  }
+  
+  /* Contenedor responsive */
+  .container-responsive {
+    @apply max-w-[320px] mobile-s:max-w-[375px] mobile-m:max-w-[425px] mobile-l:max-w-[475px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px];
+  }
+}
 @layer base {
   *, *::before, *::after {
     @apply motion-reduce:transition-none motion-reduce:animate-none;
