@@ -46,6 +46,82 @@
         </div>
       </div>
     `;
+
+  // 1B. LOADER RÁPIDO PARA ATAJOS DE TECLADO
+  function showQuickLoader() {
+    const existingLoader = document.getElementById('quick-loader');
+    if (existingLoader) return;
+    
+    const loader = document.createElement('div');
+    loader.id = 'quick-loader';
+    loader.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #000000, #1a1a1a, #000000); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: Ubuntu, sans-serif;">
+        
+        <!-- Logo de Pucará -->
+        <div style="margin-bottom: 30px; animation: logo-pulse-fast 1s ease-in-out infinite;">
+          <img src="/logopucara.png" alt="Pucará Gaming" style="width: 80px; height: 80px; filter: drop-shadow(0 0 15px rgba(255,107,26,0.7));" />
+        </div>
+        
+        <!-- Texto de carga -->
+        <h2 style="color: #ff6b1a; font-size: 24px; font-weight: 700; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; animation: text-glow-fast 1s ease-in-out infinite;">
+          NAVEGANDO...
+        </h2>
+        
+        <!-- Barra de carga rápida -->
+        <div style="width: 200px; height: 4px; background: rgba(255,107,26,0.2); border-radius: 2px; overflow: hidden; margin-bottom: 15px; border: 1px solid rgba(255,107,26,0.3);">
+          <div id="quick-progress-bar" style="height: 100%; background: linear-gradient(90deg, #ff6b1a, #ff8c42, #ff6b1a); width: 0%; transition: width 0.05s ease; animation: progress-shine-fast 0.8s linear infinite;"></div>
+        </div>
+      </div>
+    `;
+    
+    // Agregar animaciones CSS para el loader rápido
+    const quickStyle = document.createElement('style');
+    quickStyle.textContent = `
+      @keyframes logo-pulse-fast {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.9; }
+      }
+      
+      @keyframes text-glow-fast {
+        0%, 100% { text-shadow: 0 0 10px rgba(255,107,26,0.5); }
+        50% { text-shadow: 0 0 20px rgba(255,107,26,0.8); }
+      }
+      
+      @keyframes progress-shine-fast {
+        0% { box-shadow: 0 0 5px rgba(255,107,26,0.3); }
+        50% { box-shadow: 0 0 15px rgba(255,107,26,0.6); }
+        100% { box-shadow: 0 0 5px rgba(255,107,26,0.3); }
+      }
+    `;
+    
+    document.head.appendChild(quickStyle);
+    document.body.appendChild(loader);
+    
+    // Progreso rápido automático
+    const progressBar = document.getElementById('quick-progress-bar');
+    let progress = 0;
+    const quickInterval = setInterval(() => {
+      progress += 20; // Incremento más rápido
+      progressBar.style.width = progress + '%';
+      
+      if (progress >= 100) {
+        clearInterval(quickInterval);
+      }
+    }, 50); // Más rápido: cada 50ms
+  }
+  
+  function hideQuickLoader() {
+    const loader = document.getElementById('quick-loader');
+    if (loader) {
+      loader.style.transition = 'opacity 0.2s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        if (loader.parentNode) {
+          loader.parentNode.removeChild(loader);
+        }
+      }, 200);
+    }
+  }
     
     // Agregar animaciones CSS
     const style = document.createElement('style');
@@ -182,10 +258,13 @@
     }, 300);
   }
   
-  // 3. NAVEGACIÓN CON TECLADO GAMING
+  // 3. NAVEGACIÓN CON TECLADO GAMING - VERSIÓN LIMPIA
   function setupKeyboardNavigation() {
+    console.log('🎮 Configurando navegación por teclado...');
+    
+    // Shortcuts disponibles
     const shortcuts = {
-      'KeyH': '/',
+      'KeyH': '/home',
       'KeyT': '/teams',
       'KeyN': '/news',
       'KeyC': '/contact',
@@ -193,36 +272,92 @@
       'KeyA': '/about'
     };
     
-    document.addEventListener('keydown', function(e) {
-      if (e.altKey && shortcuts[e.code]) {
-        e.preventDefault();
-        showGamingNavigationNotification();
+    // Función para manejar las teclas
+    function handleKeyPress(event) {
+      // Solo procesar si Alt está presionado
+      if (!event.altKey) return;
+      
+      // DEBUG: Verificar que funciona
+      console.log('🎮 Alt presionado con:', event.code, event.key);
+      
+      // Manejar atajos de navegación
+      if (shortcuts[event.code]) {
+        event.preventDefault();
+        console.log('🎮 Navegando a:', shortcuts[event.code]);
         
-        // Función para navegar con pantalla de carga
-        function navigateWithLoader(targetUrl, useLoader = false) {
-          // Para atajos de teclado: navegación directa sin loader extra
-          // Esto evita doble pantalla de carga (loader + view transitions)
-          if (useLoader && sessionStorage.getItem('visited')) {
-            // Guardar la URL de destino
-            sessionStorage.setItem('targetUrl', targetUrl);
-            // Ir a la pantalla de carga
-            window.location.href = '/';
-          } else {
-            // Navegación directa con View Transitions (más fluida)
-            window.location.href = targetUrl;
+        // INMEDIATAMENTE mostrar overlay para cubrir el flash
+        const overlay = document.createElement('div');
+        overlay.id = 'navigation-overlay';
+        overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #000000, #1a1a1a, #000000);
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: Ubuntu, sans-serif;
+        `;
+        
+        overlay.innerHTML = `
+          <img src="/logopucara.png" alt="Pucará Gaming" 
+               style="width: 80px; height: 80px; filter: drop-shadow(0 0 15px rgba(255,107,26,0.7)); animation: pulse 1s infinite;" />
+          <h2 style="color: #ff6b1a; font-size: 24px; font-weight: 700; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase;">
+            NAVEGANDO...
+          </h2>
+        `;
+        
+        // Agregar CSS para animación
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
           }
-        }
+        `;
+        document.head.appendChild(style);
         
-        // Usar navegación con pantalla de carga
-        navigateWithLoader(shortcuts[e.code]);
+        // Agregar overlay inmediatamente
+        document.body.appendChild(overlay);
+        
+        // Navegar después de 100ms para asegurar que el overlay se muestre
+        setTimeout(() => {
+          window.location.href = shortcuts[event.code];
+        }, 100);
+        
+        return;
       }
       
-      // Mostrar atajos con Alt + M (Map)
-      if (e.altKey && e.key === 'm') {
-        e.preventDefault();
-        showGamingShortcuts();
+      // Manejar Alt + M para mostrar shortcuts
+      if (event.key === 'm') {
+        event.preventDefault();
+        console.log('🎮 Alt + M presionado');
+        // POR AHORA: Solo mostrar en consola
+        console.log('🎮 Shortcuts disponibles:');
+        console.log('Alt + H → Home');
+        console.log('Alt + T → Teams');
+        console.log('Alt + N → News');
+        console.log('Alt + C → Contact');
+        console.log('Alt + S → Store');
+        console.log('Alt + A → About');
+        return;
       }
-    });
+    }
+    
+    // Remover listener anterior si existe
+    if (window.pucaraKeyHandler) {
+      document.removeEventListener('keydown', window.pucaraKeyHandler);
+      console.log('🎮 Handler anterior removido');
+    }
+    
+    // Agregar nuevo listener
+    window.pucaraKeyHandler = handleKeyPress;
+    document.addEventListener('keydown', handleKeyPress);
+    console.log('🎮 Nuevo handler agregado');
   }
   
   function showGamingNavigationNotification() {
@@ -365,7 +500,7 @@
     });
   }
   
-  // 7. INICIALIZACIÓN PRINCIPAL
+  // 7. INICIALIZACIÓN PRINCIPAL - VERSIÓN LIMPIA
   function initGamingEnhancements() {
     // Configurar navegación por teclado
     setupKeyboardNavigation();
@@ -376,12 +511,12 @@
     // Inicializar características específicas de la página actual
     initializePageSpecificFeatures();
     
-    // Mostrar pantalla de carga en la primera carga (sin restricciones)
+    // Mostrar pantalla de carga solo en la primera visita
     if (!sessionStorage.getItem('pucaraFirstLoad')) {
       showGamingLoader();
       setTimeout(() => {
         hideGamingLoader();
-      }, 3000); // 3 segundos también para primera carga
+      }, 3000);
       sessionStorage.setItem('pucaraFirstLoad', 'true');
     }
   }
@@ -395,7 +530,10 @@
   
   // 9. REINICIALIZACIÓN EN NAVEGACIÓN
   document.addEventListener('astro:page-load', function() {
-    // Solo reinicializar características específicas
+    // Reinicializar SOLO la navegación por teclado
+    setupKeyboardNavigation();
+    
+    // Reinicializar características específicas de la página
     initializePageSpecificFeatures();
   });
   

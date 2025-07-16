@@ -619,13 +619,23 @@ if (document.readyState === 'loading') {
     border: 0;
   }
 
-  /* Prevenir que el autofill cambie el color de fondo */
+  /* Prevenir que el autofill cambie el color de fondo - Mejorado */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.3) inset !important;
     -webkit-text-fill-color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+  
+  /* Para Firefox */
+  input:-moz-autofill,
+  input:-moz-autofill:hover,
+  input:-moz-autofill:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
   }
   
   /* Forzar el estilo correcto para todos los estados */
@@ -635,6 +645,18 @@ if (document.readyState === 'loading') {
   textarea {
     background-color: rgba(0, 0, 0, 0.3) !important;
     color: #ffffff !important;
+  }
+  
+  /* Estilo adicional para asegurar consistencia */
+  input:autofill,
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.3) inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.3) inset !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
   }
   
   /* Mejorar contraste de focus para accesibilidad */
