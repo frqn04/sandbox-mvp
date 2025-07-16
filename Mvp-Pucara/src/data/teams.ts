@@ -82,7 +82,7 @@ export const teamsData: Record<string, Team> = {
         nacionalidad: "🇦🇷 Argentina", 
         rol: "Fighter", 
         instagram: "dgoitea", 
-        imagen: "/players/neokyo.png" 
+        imagen: "/players/neokyo.webp" 
       },
     ],
   },
