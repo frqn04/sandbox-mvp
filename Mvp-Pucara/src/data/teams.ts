@@ -104,6 +104,56 @@ export const teamsData: Record<string, Team> = {
       },
     ],
   },
+  "chaotic-cards": {
+    id: "chaotic-cards",
+    nombre: "CHAOTIC CARDS",
+    emoji: "🃏",
+    bgClass: "bg-primary-subtle",
+    descripcion: "Nuestro equipo de Chaotic Cards compite en los torneos más importantes de cartas coleccionables.",
+    imagen: "/GGbanner.png",
+    players: [
+      { 
+        nombre: "Jugador 1", 
+        edad: 24, 
+        nacionalidad: "🇦🇷 Argentina", 
+        rol: "Maestro de Cartas", 
+        instagram: "jugador1", 
+        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+1" 
+      },
+      { 
+        nombre: "Jugador 2", 
+        edad: 26, 
+        nacionalidad: "🇦🇷 Argentina", 
+        rol: "Estratega", 
+        instagram: "jugador2", 
+        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+2" 
+      },
+      { 
+        nombre: "Jugador 3", 
+        edad: 22,
+        nacionalidad: "🇦🇷 Argentina", 
+        rol: "Táctico", 
+        instagram: "jugador3", 
+        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+3" 
+      },
+      { 
+        nombre: "Jugador 4", 
+        edad: 25,
+        nacionalidad: "🇦🇷 Argentina", 
+        rol: "Defensor", 
+        instagram: "jugador4", 
+        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+4" 
+      },
+      { 
+        nombre: "Jugador 5", 
+        edad: 23,
+        nacionalidad: "🇦🇷 Argentina",
+        rol: "Atacante", 
+        instagram: "jugador5", 
+        imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+5" 
+      },
+    ],
+  },
 };
 
 // Utility function para obtener todos los equipos como array
