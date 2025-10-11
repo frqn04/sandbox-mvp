@@ -65,8 +65,8 @@ export const teamsData: Record<string, Team> = {
         rol: "Support", 
         instagram: "jugador5", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+5" 
-      },
-    ],
+      }
+    ]
   },
   "street-fighter": {
     id: "street-fighter",
@@ -83,8 +83,8 @@ export const teamsData: Record<string, Team> = {
         rol: "Fighter", 
         instagram: "dgoitea", 
         imagen: "/players/neokyo.webp" 
-      },
-    ],
+      }
+    ]
   },
   "fifa": {
     id: "fifa",
@@ -101,8 +101,8 @@ export const teamsData: Record<string, Team> = {
         rol: "Pro Player", 
         instagram: "jugadorfifa", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+FIFA" 
-      },
-    ],
+      }
+    ]
   },
   "chaotic-cards": {
     id: "chaotic-cards",
@@ -151,9 +151,9 @@ export const teamsData: Record<string, Team> = {
         rol: "Atacante", 
         instagram: "jugador5", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+5" 
-      },
-    ],
-  },
+      }
+    ]
+  }
 };
 
 // Utility function para obtener todos los equipos como array
