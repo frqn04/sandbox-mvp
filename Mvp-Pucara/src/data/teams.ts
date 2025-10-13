@@ -109,46 +109,46 @@ export const teamsData: Record<string, Team> = {
     nombre: "CHAOTIC CARDS",
     emoji: "🃏",
     bgClass: "bg-primary-subtle",
-    descripcion: "Nuestro equipo de Chaotic Cards compite en los torneos más importantes de cartas coleccionables.",
+    descripcion: "Nuestro equipo de jovenes desarrolladores y creadores del grandioso juego Chaotic Cards.",
     imagen: "/GGbanner.png",
     players: [
       { 
-        nombre: "Jugador 1", 
+        nombre: "Franco Balella", 
         edad: 24, 
         nacionalidad: "🇦🇷 Argentina", 
-        rol: "Maestro de Cartas", 
+        rol: "Full-Stack", 
         instagram: "jugador1", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+1" 
       },
       { 
-        nombre: "Jugador 2", 
+        nombre: "Eduardo Soto", 
         edad: 26, 
         nacionalidad: "🇦🇷 Argentina", 
-        rol: "Estratega", 
+        rol: "Full-Stack", 
         instagram: "jugador2", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+2" 
       },
       { 
-        nombre: "Jugador 3", 
-        edad: 22,
+        nombre: "Brandon Ayaviri", 
+        edad: 20,
         nacionalidad: "🇦🇷 Argentina", 
-        rol: "Táctico", 
+        rol: "Full-Stack", 
         instagram: "jugador3", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+3" 
       },
       { 
-        nombre: "Jugador 4", 
-        edad: 25,
+        nombre: "Lucas Muñoz", 
+        edad: 22,
         nacionalidad: "🇦🇷 Argentina", 
-        rol: "Defensor", 
+        rol: "Full-Stack", 
         instagram: "jugador4", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+4" 
       },
       { 
-        nombre: "Jugador 5", 
-        edad: 23,
+        nombre: "Fabio Gomez", 
+        edad: 20,
         nacionalidad: "🇦🇷 Argentina",
-        rol: "Atacante", 
+        rol: "Full-Stack", 
         instagram: "jugador5", 
         imagen: "https://via.placeholder.com/300x300/2d2d2d/ea601a?text=Jugador+5" 
       }
